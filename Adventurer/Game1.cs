@@ -10,7 +10,6 @@ namespace Adventurer
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
         List<Sprite> sprites;
         public Game1()
         {
@@ -34,9 +33,10 @@ namespace Adventurer
 
             // TODO: use this.Content to load your game content here
             sprites = new();
-            Texture2D texture = Content.Load<Texture2D>("balls");
-            sprites.Add(new Sprite(texture, new Vector2(100,100)));
-            sprites.Add(new Player(texture, new Vector2(100,200)));
+            Texture2D current_level_background = Content.Load<Texture2D>("Maps/hero-map");
+            Texture2D playertexture = Content.Load<Texture2D>("Hero/hero-down");
+            sprites.Add(new Sprite(current_level_background, new Vector2(0,0)));
+            sprites.Add(new Player(playertexture, new Vector2(0,0)));
         }
 
         protected override void Update(GameTime gameTime)
@@ -49,7 +49,7 @@ namespace Adventurer
             {
                 sprite.Update(gameTime);
             }
-
+            sprites[1].Texture = Content.Load<Texture2D>(Player.player_image_name);
             base.Update(gameTime);
         }
 
@@ -64,7 +64,6 @@ namespace Adventurer
                 sprite.Draw(_spriteBatch);
             }
             _spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }
