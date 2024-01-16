@@ -53,6 +53,8 @@ namespace Adventurer
             _graphics.PreferredBackBufferHeight = floor.Height*10;
             _graphics.ApplyChanges();
             #endregion
+            List<Sprite> idk=new List<Sprite>(sprites);
+            IsItaWall.spriteses = idk;
             Texture2D playertexture = Content.Load<Texture2D>("Hero/hero-down");
             sprites.Add(new Player(playertexture, new Vector2(floor.Width*5,floor.Height*5)));
         }

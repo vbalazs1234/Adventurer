@@ -17,6 +17,7 @@ namespace Adventurer.Sprites
         private Texture2D player_image;
         public bool canMove = true;
         public static bool doorunlocked=true;
+        private IsItaWall isItaWall = new IsItaWall();
         public Player(Texture2D texture, Vector2 position) : base(texture, position)
         {
             player_image = texture;
@@ -29,29 +30,54 @@ namespace Adventurer.Sprites
             if (Keyboard.GetState().IsKeyDown(Keys.W) && canMove != false)
             {
                 canMove = false;
-                //if (Is_it_a_wall())
-                //{
+                if (isItaWall.Is_it_a_wall_upward(Position))
+                {
+                    player_image_name = "Hero/hero-up";
+                }
+                else
+                {
                 Position.Y -= player_image.Height;
-                player_image_name = "Hero/hero-up";
-                //}
+                player_image_name = "Hero/hero-up";    
+                }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S) && canMove != false)
             {
-                Position.Y += player_image.Height;
                 canMove = false;
+                if (isItaWall.Is_it_a_wall_downward(Position))
+                {
                 player_image_name = "Hero/hero-down";
+                }
+                else
+                {
+                Position.Y += player_image.Height;
+                player_image_name = "Hero/hero-down";
+                }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A) && canMove != false)
             {
-                Position.X -= player_image.Width;
                 canMove = false;
+                if (isItaWall.Is_it_a_wall_left(Position))
+                {
+                    player_image_name = "Hero/hero-left";
+                }
+                else
+                {
+                Position.X -= player_image.Width;
                 player_image_name = "Hero/hero-left";
+                }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D) && canMove != false)
             {
-                Position.X += player_image.Width;
                 canMove = false;
-                player_image_name = "Hero/hero-right";
+                if (isItaWall.Is_it_a_wall_right(Position))
+                {
+                    player_image_name = "Hero/hero-right";
+                }
+                else
+                {
+                    Position.X += player_image.Width;
+                    player_image_name = "Hero/hero-right";
+                }
             }
             if (Keyboard.GetState().IsKeyUp(Keys.W) && Keyboard.GetState().IsKeyUp(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.D) && canMove == false)
             {
