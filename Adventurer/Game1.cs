@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Adventurer.Sprites;
 using System.Collections.Generic;
+using Adventurer.Sprites.Map;
 
 namespace Adventurer
 {
@@ -11,6 +12,7 @@ namespace Adventurer
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         List<Sprite> sprites;
+        Maps maps;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -33,13 +35,26 @@ namespace Adventurer
 
             // TODO: use this.Content to load your game content here
             sprites = new();
-            Texture2D current_level_background = Content.Load<Texture2D>("Maps/hero-map");
-            Texture2D playertexture = Content.Load<Texture2D>("Hero/hero-down");
-            sprites.Add(new Sprite(current_level_background, new Vector2(0,0)));
-            sprites.Add(new Player(playertexture, new Vector2(0,0)));
-            _graphics.PreferredBackBufferWidth = current_level_background.Width;
-            _graphics.PreferredBackBufferHeight = current_level_background.Height;
+            #region map
+            Texture2D floor = Content.Load<Texture2D>("Maps/floor");
+            Texture2D wall = Content.Load<Texture2D>("Maps/wall");
+            Texture2D door = Content.Load<Texture2D>("Maps/door");
+            maps= new Maps(door, wall, floor);
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    sprites.Add(new Sprite(maps.starter_room[i, j], new Vector2(floor.Width * j, floor.Height * i)));
+                }
+            }
+            //Texture2D current_level_background = Content.Load<Texture2D>("Maps/hero-map");
+            //sprites.Add(new Sprite(current_level_background, new Vector2(0, 0)));
+            _graphics.PreferredBackBufferWidth = floor.Width*10;
+            _graphics.PreferredBackBufferHeight = floor.Height*10;
             _graphics.ApplyChanges();
+            #endregion
+            Texture2D playertexture = Content.Load<Texture2D>("Hero/hero-down");
+            sprites.Add(new Player(playertexture, new Vector2(floor.Width*5,floor.Height*5)));
         }
 
         protected override void Update(GameTime gameTime)
@@ -52,7 +67,7 @@ namespace Adventurer
             {
                 sprite.Update(gameTime,_graphics);
             }
-            sprites[1].Texture = Content.Load<Texture2D>(Player.player_image_name);
+            sprites[sprites.Count-1].Texture = Content.Load<Texture2D>(Player.player_image_name);
             base.Update(gameTime);
         }
 
