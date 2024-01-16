@@ -33,7 +33,7 @@ namespace Adventurer.Sprites
 
 
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, GraphicsDeviceManager _graphics)
         {
 
         }

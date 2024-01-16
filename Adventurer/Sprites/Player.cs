@@ -20,9 +20,9 @@ namespace Adventurer.Sprites
             player_image = texture;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics)
         {
-            base.Update(gameTime);
+            base.Update(gameTime,_graphics);
 
             if (Keyboard.GetState().IsKeyDown(Keys.W) && canMove != false)
             {
@@ -51,6 +51,24 @@ namespace Adventurer.Sprites
             if (Keyboard.GetState().IsKeyUp(Keys.W) && Keyboard.GetState().IsKeyUp(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.D) && canMove == false)
             {
                 canMove = true;
+            }
+
+            if (Position.X > _graphics.PreferredBackBufferWidth - player_image.Width)
+            {
+                Position.X = _graphics.PreferredBackBufferWidth - player_image.Width;
+            }
+            else if (Position.X < 0)
+            {
+                Position.X = 0;
+            }
+
+            if (Position.Y > _graphics.PreferredBackBufferHeight - player_image.Height)
+            {
+                Position.Y = _graphics.PreferredBackBufferHeight - player_image.Height;
+            }
+            else if (Position.Y < 0)
+            {
+                Position.Y = 0;
             }
         }
     }

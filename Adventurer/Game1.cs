@@ -37,6 +37,9 @@ namespace Adventurer
             Texture2D playertexture = Content.Load<Texture2D>("Hero/hero-down");
             sprites.Add(new Sprite(current_level_background, new Vector2(0,0)));
             sprites.Add(new Player(playertexture, new Vector2(0,0)));
+            _graphics.PreferredBackBufferWidth = current_level_background.Width;
+            _graphics.PreferredBackBufferHeight = current_level_background.Height;
+            _graphics.ApplyChanges();
         }
 
         protected override void Update(GameTime gameTime)
@@ -47,7 +50,7 @@ namespace Adventurer
             // TODO: Add your update logic here
             foreach (var sprite in sprites)
             {
-                sprite.Update(gameTime);
+                sprite.Update(gameTime,_graphics);
             }
             sprites[1].Texture = Content.Load<Texture2D>(Player.player_image_name);
             base.Update(gameTime);
