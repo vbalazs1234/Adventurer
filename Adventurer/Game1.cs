@@ -38,10 +38,10 @@ namespace Adventurer
             #region map
             Texture2D floor = Content.Load<Texture2D>("Maps/floor");
             Texture2D wall = Content.Load<Texture2D>("Maps/wall");
-            Texture2D door = Content.Load<Texture2D>("Maps/door");
             Texture2D torch = Content.Load<Texture2D>("Maps/torch");
             Texture2D filler = Content.Load<Texture2D>("Maps/filler");
-            maps = new Maps(door, wall, floor,torch,filler);
+            Texture2D trap = Content.Load<Texture2D>("Maps/trap");
+            maps = new Maps( wall, floor,torch,filler,trap);
             for (int a = 0; a < 2; a++)
             {
                 if (a == 0)
