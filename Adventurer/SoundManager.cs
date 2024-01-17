@@ -1,46 +1,51 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using Microsoft.Xna.Framework;
+//using Microsoft.Xna.Framework.Audio;
+//using Microsoft.Xna.Framework.Media;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace Adventurer
-{
-    internal class SoundManager
-    {
-        private SoundEffect BackgroundMusic;
-        public SoundEffectInstance BackgroundMusicInstance { get; private set; }
+//namespace Adventurer
+//{
+//    internal class SoundManager
+//    {
+//        private static Song BackgroundMusic;
 
-        public SoundManager(Game game)
-        {
-            //need to be set
-            BackgroundMusic = game.Content.Load<SoundEffect>("background-music.wav");
-            BackgroundMusicInstance = BackgroundMusic.CreateInstance();
-        }
-        
+//        public SoundManager(Game game)
+//        {
+//            // Load the background music using the same content path
+//            BackgroundMusic = game.Content.Load<Song>("Sounds/background-music");
+//            MediaPlayer.IsRepeating = true; // Set to true for looping
+//        }
 
-        public void PlayMusic()
-        {
-            if (BackgroundMusicInstance.State != SoundState.Playing)
-            {
-                BackgroundMusicInstance.IsLooped = true;
-                BackgroundMusicInstance.Play();
-            }
-        }
+//        public static void PlayMusic()
+//        {
+//            // If the music is not playing, start playing
+//            if (MediaPlayer.State != MediaState.Playing)
+//            {
+//                MediaPlayer.Play(BackgroundMusic);
+//            }
+//        }
 
-        public void IncreaseVolume()
-        {
-            BackgroundMusicInstance.Volume -= SoundEffect.MasterVolume; BackgroundMusicInstance.Volume = 0;
-        }
+//        public void StopMusic()
+//        {
+//            // If the music is playing, stop it
+//            if (MediaPlayer.State == MediaState.Playing)
+//            {
+//                MediaPlayer.Stop();
+//            }
+//        }
+//        public void Update()
+//        {
+//            // Check and handle any necessary updates
+//            // For example, restart the music if it has stopped (due to looping)
+//            if (MediaPlayer.State == MediaState.Stopped)
+//            {
+//                SoundManager.PlayMusic();
+//            }
+//        }
 
-        public void StopMusic()
-        {
-            if (BackgroundMusicInstance.State == SoundState.Playing)
-            {
-                BackgroundMusicInstance.Stop();
-            }
-        }
-    }
-}
+//    }
+//}
