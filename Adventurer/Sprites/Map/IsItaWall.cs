@@ -15,13 +15,13 @@ namespace Adventurer.Sprites.Map
         
         public bool Is_it_a_wall_upward(Vector2 Position)
         {
-            for (int i = 0; i < spriteses.Count; i++)
+            foreach (var item in spriteses)
             {
-                if (Position.Y-spriteses[i].Texture.Height == spriteses[i].Position.Y && Position.X == spriteses[i].Position.X)
+                if (Position.Y - item.Texture.Height == item.Position.Y && Position.X == item.Position.X)
                 {
-                    if (spriteses[i].Texture.Name == "Maps/wall")
+                    if (item.Texture.Name == "Maps/wall")
                     {
-                    return true;
+                        return true;
                     }
                 }
             }

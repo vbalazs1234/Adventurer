@@ -39,16 +39,33 @@ namespace Adventurer
             Texture2D floor = Content.Load<Texture2D>("Maps/floor");
             Texture2D wall = Content.Load<Texture2D>("Maps/wall");
             Texture2D door = Content.Load<Texture2D>("Maps/door");
-            maps= new Maps(door, wall, floor);
-            for (int i = 0; i < 10; i++)
+            Texture2D torch = Content.Load<Texture2D>("Maps/torch");
+            Texture2D filler = Content.Load<Texture2D>("Maps/filler");
+            maps = new Maps(door, wall, floor,torch,filler);
+            for (int a = 0; a < 2; a++)
             {
-                for (int j = 0; j < 10; j++)
+                if (a == 0)
                 {
-                    sprites.Add(new Sprite(maps.starter_room[i, j], new Vector2(floor.Width * j, floor.Height * i)));
+                    for (int i = 0; i < 10; i++)
+                    {
+                        for (int j = 0; j < 10; j++)
+                        {
+                            sprites.Add(new Sprite(maps.starter_room[i, j], new Vector2(floor.Width * j, floor.Height * i)));
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        for (int j = 0; j < 10; j++)
+                        {
+                            sprites.Add(new Sprite(maps.objects[i, j], new Vector2(floor.Width * j, floor.Height * i)));
+                        }
+                    }
                 }
             }
-            //Texture2D current_level_background = Content.Load<Texture2D>("Maps/hero-map");
-            //sprites.Add(new Sprite(current_level_background, new Vector2(0, 0)));
+            
             _graphics.PreferredBackBufferWidth = floor.Width*10;
             _graphics.PreferredBackBufferHeight = floor.Height*10;
             _graphics.ApplyChanges();
