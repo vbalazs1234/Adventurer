@@ -241,3 +241,9 @@
 /processorParam:TextureFormat=Color
 /build:Maps/wall.png
 
+#begin Sounds/background-music.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/background-music.mp3
+

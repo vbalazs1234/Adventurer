@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Adventurer.Sprites;
 using System.Collections.Generic;
 using Adventurer.Sprites.Map;
+using Microsoft.Xna.Framework.Media;
 
 namespace Adventurer
 {
@@ -13,9 +14,13 @@ namespace Adventurer
         private SpriteBatch _spriteBatch;
         List<Sprite> sprites;
         Maps maps;
+        //SoundManager soundManager;
+        Song song;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            //soundManager = new SoundManager(this);
+            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -32,7 +37,8 @@ namespace Adventurer
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            song = Content.Load<Song>("Sounds/background-music");
+            MediaPlayer.Play(song);
             // TODO: use this.Content to load your game content here
             sprites = new();
             #region map
@@ -74,12 +80,16 @@ namespace Adventurer
             IsItaWall.spriteses = idk;
             Texture2D playertexture = Content.Load<Texture2D>("Hero/hero-down");
             sprites.Add(new Player(playertexture, new Vector2(floor.Width*5,floor.Height*5)));
+          
         }
 
         protected override void Update(GameTime gameTime)
         {
+          
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            //soundManager.Update();
+           
 
             // TODO: Add your update logic here
             foreach (var sprite in sprites)
@@ -87,6 +97,7 @@ namespace Adventurer
                 sprite.Update(gameTime,_graphics);
             }
             sprites[sprites.Count-1].Texture = Content.Load<Texture2D>(Player.player_image_name);
+   
             base.Update(gameTime);
         }
 
