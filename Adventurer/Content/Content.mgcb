@@ -85,6 +85,18 @@
 /processorParam:TextureFormat=Color
 /build:Maps/door.png
 
+#begin Maps/filler.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Maps/filler.png
+
 #begin Maps/floor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -108,6 +120,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Maps/hero-map.png
+
+#begin Maps/torch.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Maps/torch.png
 
 #begin Maps/wall.png
 /importer:TextureImporter

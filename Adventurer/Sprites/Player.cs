@@ -105,15 +105,5 @@ namespace Adventurer.Sprites
             }
             #endregion
         }
-        //private bool Is_it_a_wall()
-        //{
-        //    for (int i = 0; i < 10; i++)
-        //    {
-        //        for (int j = 0; j < 10; j++)
-        //        {
-                    
-        //        }
-        //    }
-        //}
     }
 }
