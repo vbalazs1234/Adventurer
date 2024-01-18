@@ -107,7 +107,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Maps/Doors/doorLeftLeft.png
+/build:Maps/Doors/doorLeftLeft.png;Maps/Doors/doorRightLeft.png
 
 #begin Maps/Doors/doorLeftRight.png
 /importer:TextureImporter
@@ -119,7 +119,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Maps/Doors/doorLeftRight.png
+/build:Maps/Doors/doorLeftRight.png;Maps/Doors/doorRightRight.png
 
 #begin Maps/Doors/doorRightLeft.png
 /importer:TextureImporter
@@ -131,7 +131,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Maps/Doors/doorRightLeft.png
+/build:Maps/Doors/doorRightLeft.png;Maps/Doors/doorLeftLeft.png
 
 #begin Maps/Doors/doorRightRight.png
 /importer:TextureImporter
@@ -143,7 +143,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Maps/Doors/doorRightRight.png
+/build:Maps/Doors/doorRightRight.png;Maps/Doors/doorLeftRight.png
 
 #begin Maps/Doors/doorTopLeft.png
 /importer:TextureImporter

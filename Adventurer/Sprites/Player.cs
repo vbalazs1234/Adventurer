@@ -30,53 +30,90 @@ namespace Adventurer.Sprites
             if (Keyboard.GetState().IsKeyDown(Keys.W) && canMove != false)
             {
                 canMove = false;
-                if (isItaWall.Is_it_a_wall_upward(Position))
+                switch (isItaWall.Is_it_a_wall_upward(Position))
                 {
-                    player_image_name = "Hero/hero-up";
-                }
-                else
-                {
-                Position.Y -= player_image.Height;
-                player_image_name = "Hero/hero-up";    
+                    case 1:
+                        player_image_name = "Hero/hero-up";
+                        break;
+                    case 2:
+                        player_image_name = "Hero/hero-up";
+                        if (MapsInOne.PlayerMapPosition_Y > 0)
+                        {
+                            Position.Y = _graphics.PreferredBackBufferHeight - (player_image.Width * 2);
+                            MapsInOne.PlayerMapPosition_Y--;
+                        }
+                        break;
+                    default:
+                        Position.Y -= player_image.Height;
+                        player_image_name = "Hero/hero-up";
+                        break;
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S) && canMove != false)
             {
                 canMove = false;
-                if (isItaWall.Is_it_a_wall_downward(Position))
+                switch (isItaWall.Is_it_a_wall_downward(Position))
                 {
-                player_image_name = "Hero/hero-down";
-                }
-                else
-                {
-                Position.Y += player_image.Height;
-                player_image_name = "Hero/hero-down";
+                case 1:
+                    player_image_name = "Hero/hero-down";
+                    break;
+                case 2:
+                    player_image_name = "Hero/hero-down";
+                        if (MapsInOne.PlayerMapPosition_Y < 4)
+                        {
+                            Position.Y = 0 + player_image.Width;
+                            MapsInOne.PlayerMapPosition_Y++;
+                        }
+                        break;
+                default:
+                
+                    Position.Y += player_image.Height;
+                    player_image_name = "Hero/hero-down";
+                    break;
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A) && canMove != false)
             {
                 canMove = false;
-                if (isItaWall.Is_it_a_wall_left(Position))
+                switch (isItaWall.Is_it_a_wall_left(Position))
                 {
-                    player_image_name = "Hero/hero-left";
-                }
-                else
-                {
+                    case 1:
+                        player_image_name = "Hero/hero-left";
+                        break;
+                    case 2:
+                        player_image_name = "Hero/hero-left";
+                        if (MapsInOne.PlayerMapPosition_X > 0)
+                        {
+                            Position.X = _graphics.PreferredBackBufferWidth - (player_image.Width * 2);
+                            MapsInOne.PlayerMapPosition_X--;
+                        }
+                        break;
+                    default:
                 Position.X -= player_image.Width;
                 player_image_name = "Hero/hero-left";
+                        break;
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D) && canMove != false)
             {
                 canMove = false;
-                if (isItaWall.Is_it_a_wall_right(Position))
+                switch (isItaWall.Is_it_a_wall_right(Position))
                 {
-                    player_image_name = "Hero/hero-right";
-                }
-                else
-                {
+                    case 1:
+                        player_image_name = "Hero/hero-right";
+                        break;
+                    case 2:
+                        player_image_name = "Hero/hero-right";
+                        if (MapsInOne.PlayerMapPosition_X < 4)
+                        {
+                            Position.X = 0 + player_image.Width;
+                            MapsInOne.PlayerMapPosition_X++;
+                        }
+                        break;
+                    default:
                     Position.X += player_image.Width;
                     player_image_name = "Hero/hero-right";
+                        break;
                 }
             }
             if (Keyboard.GetState().IsKeyUp(Keys.W) && Keyboard.GetState().IsKeyUp(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.D) && canMove == false)

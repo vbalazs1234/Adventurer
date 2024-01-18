@@ -13,14 +13,12 @@ namespace Adventurer
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         List<Sprite> sprites;
-        Maps maps;
-        //SoundManager soundManager;
-        Song song;
+        MapsInOne maps = new MapsInOne();
+        MapLoader mapLoader = new MapLoader();
+
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            //soundManager = new SoundManager(this);
-            
+            _graphics = new GraphicsDeviceManager(this);            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -37,49 +35,27 @@ namespace Adventurer
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            song = Content.Load<Song>("Sounds/background-music");
-            MediaPlayer.Play(song);
+            Doors doors = new Doors();
+            SoundManager sound = new SoundManager();
+            Maps beformaps = new Maps(1,1);
+            doors.LoadContent(Content);
+            sound.LoadContent(Content);
+            beformaps.LoadContent(Content);
+           
+            maps.fill();
+            SoundManager.PlayMusic();
             // TODO: use this.Content to load your game content here
             sprites = new();
             #region map
-            Texture2D floor = Content.Load<Texture2D>("Maps/floor");
-            Texture2D wall = Content.Load<Texture2D>("Maps/wall");
-            Texture2D torch = Content.Load<Texture2D>("Maps/torch");
-            Texture2D filler = Content.Load<Texture2D>("Maps/filler");
-            Texture2D trap = Content.Load<Texture2D>("Maps/trap");
-            maps = new Maps( wall, floor,torch,filler,trap);
-            for (int a = 0; a < 2; a++)
-            {
-                if (a == 0)
-                {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        for (int j = 0; j < 10; j++)
-                        {
-                            sprites.Add(new Sprite(maps.starter_room[i, j], new Vector2(floor.Width * j, floor.Height * i)));
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        for (int j = 0; j < 10; j++)
-                        {
-                            sprites.Add(new Sprite(maps.objects[i, j], new Vector2(floor.Width * j, floor.Height * i)));
-                        }
-                    }
-                }
-            }
-            
-            _graphics.PreferredBackBufferWidth = floor.Width*10;
-            _graphics.PreferredBackBufferHeight = floor.Height*10;
+            int distance = Maps.floor.Height;
+            sprites= mapLoader.loadMap(maps);
+            _graphics.PreferredBackBufferWidth = distance * 10;
+            _graphics.PreferredBackBufferHeight = distance * 10;
             _graphics.ApplyChanges();
             #endregion
-            List<Sprite> idk=new List<Sprite>(sprites);
-            IsItaWall.spriteses = idk;
+            IsItaWall.spriteses = sprites;
             Texture2D playertexture = Content.Load<Texture2D>("Hero/hero-down");
-            sprites.Add(new Player(playertexture, new Vector2(floor.Width*5,floor.Height*5)));
+            sprites.Add(new Player(playertexture, new Vector2(distance *5,distance *5)));
           
         }
 
@@ -88,13 +64,27 @@ namespace Adventurer
           
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            //soundManager.Update();
            
-
             // TODO: Add your update logic here
             foreach (var sprite in sprites)
             {
                 sprite.Update(gameTime,_graphics);
+            }
+            if (MapsInOne.PreviousPlayerMapPosition_X != MapsInOne.PlayerMapPosition_X)
+            {
+                for (int i = 0; i < sprites.Count-2; i++)
+                {
+                    sprites[i]=mapLoader.loadMap(maps)[i];
+                }
+                MapsInOne.PreviousPlayerMapPosition_X = MapsInOne.PlayerMapPosition_X;
+            }
+            else if(MapsInOne.PreviousPlayerMapPosition_Y != MapsInOne.PlayerMapPosition_Y)
+            {
+                for (int i = 0; i < sprites.Count - 2; i++)
+                {
+                    sprites[i] = mapLoader.loadMap(maps)[i];
+                }
+                MapsInOne.PreviousPlayerMapPosition_Y = MapsInOne.PlayerMapPosition_Y;
             }
             sprites[sprites.Count-1].Texture = Content.Load<Texture2D>(Player.player_image_name);
    

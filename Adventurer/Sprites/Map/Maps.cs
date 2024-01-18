@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -12,98 +13,108 @@ using System.Transactions;
 
 namespace Adventurer.Sprites.Map
 {
-    internal class Maps 
+    internal class Maps
     {
         Random rand = new Random();
 
-        private Texture2D torch;
-        private Texture2D trap;
-        private Texture2D wall;
-        private Texture2D floor;
-        private Texture2D filler;
+        public static Texture2D torch;
+        public static Texture2D trap;
+        public static Texture2D wall;
+        public static Texture2D floor;
+        public static Texture2D filler;
 
         public Texture2D[,] starter_room = new Texture2D[10, 10];
         public Texture2D[,] objects = new Texture2D[10, 10];
-        public Maps(Texture2D wall , Texture2D floor,Texture2D torch,Texture2D filler,Texture2D trap)
+        int[,] Blocks = new int[4, 4];
+        public Maps(int aPozition, int bPozition)
         {
-            this.torch = torch;
-            this.filler = filler;
-            this.wall = wall;
-            this.floor = floor;
-            this.trap = trap;
-            basicMapGen();
-            fillWhitObjects();
-            addTorches();
+            if (torch != null)
+            {
+                basicMapGen(aPozition,bPozition);
+                RandomWalls();
+                addObjects();
+            }
         }
-        public void basicMapGen()
+        public void LoadContent(ContentManager Content)
         {
-            Doors doors = new Doors(); 
+            floor = Content.Load<Texture2D>("Maps/floor");
+            wall = Content.Load<Texture2D>("Maps/wall");
+            torch = Content.Load<Texture2D>("Maps/torch");
+            filler = Content.Load<Texture2D>("Maps/filler");
+            trap = Content.Load<Texture2D>("Maps/trap");
+        }
+        public void basicMapGen(int aPozition,int bPozition)
+        {
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if (i == 0 && j == 4 ) starter_room[i, j] = doors.doorTopLeft;
-                    else if( i == 0 && j == 5) starter_room[i, j] = doors.doorTopRight;
-                    else if (i == 9 && j == 4 ) starter_room[i, j] = doors.doorBottomLeft;
-                    else if (i == 9 && j == 5) starter_room[i, j] = doors.doorBottomRight;
-                    else if (i == 4 && j == 0 ) starter_room[i, j] = doors.doorRightRight;
-                    else if(i == 5 && j == 0) starter_room[i, j] = doors.doorRightLeft;
-                    else if (i == 4 && j == 9 ) starter_room[i, j] = doors.doorLeftLeft;
-                    else if(i == 5 && j == 9) starter_room[i, j] = doors.doorLeftRight;
+                    if (i == 0 && j == 4 && aPozition!=0) starter_room[i, j] = Doors.doorTopLeft;
+                    else if (i == 0 && j == 5 && aPozition != 0) starter_room[i, j] = Doors.doorTopRight;
+                    else if (i == 9 && j == 4 && aPozition != 4) starter_room[i, j] = Doors.doorBottomLeft;
+                    else if (i == 9 && j == 5 && aPozition != 4) starter_room[i, j] = Doors.doorBottomRight;
+                    else if (i == 4 && j == 0 && bPozition != 0) starter_room[i, j] = Doors.doorLeftRight;
+                    else if (i == 5 && j == 0 && bPozition != 0) starter_room[i, j] = Doors.doorLeftLeft;
+                    else if (i == 4 && j == 9 && bPozition != 4) starter_room[i, j] = Doors.doorRightLeft;
+                    else if (i == 5 && j == 9 && bPozition != 4) starter_room[i, j] = Doors.doorRightRight;
                     else if (i == 0 || j == 0 || i == 9 || j == 9) starter_room[i, j] = wall;
                     else starter_room[i, j] = floor;
                 }
             }
         }
-        public void fillWhitObjects()
+        public void RandomWalls()
         {
             int wallcount = 0;
-            
-            for (int i = 2; i < 8; i++)
+            sections();
+            for (int a = 0; a < 4; a++)
             {
-                for (int j = 2; j < 8; j++)
+                for (int i = Blocks[a,0]; i < Blocks[a,1]; i++)
                 {
-                  if (wallcount < 6 && rand.Next(1, 6) == 1 && i!=5 && j!=5)
-                  { 
-                        starter_room[i, j] = wall;
-                        wallcount++;
-                  }
-                }
-            }
-        }
-        public void addTorches()
-        {
-            int trapcount = 0;
-            for (int a = 0; a < 2; a++)
-            {
-                if (a == 0)
-                {
-                    for (int i = 0; i < 10; i++)
+                    for (int j = Blocks[a,2]; j < Blocks[a,3]; j++)
                     {
-                        for (int j = 0; j < 10; j++)
+                        if (wallcount < 3 && rand.Next(1, 6) == 1 )
                         {
-                            objects[i, j] = filler;
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 1; i < 9; i++)
-                    {
-                        for (int j = 1; j < 9; j++)
-                        {
-                            if (trapcount < 5 && rand.Next(1, 6) == 1 && objects[i + 1, j] != trap && objects[i - 1, j] != trap && objects[i, j + 1] != trap && objects[i, j - 1] != trap && objects[i + 1, j + 1] != trap && objects[i + 1, j - 1] != trap && objects[i - 1, j + 1] != trap && objects[i - 1, j - 1] != trap)
+                            if (i == 5 && j == 5) ;
+                            else
                             {
-                                if (starter_room[i,j] != wall)
-                                {
-                                objects[i, j] = trap;
-                                trapcount++;
-                                }
+                            starter_room[i, j] = wall;
+                            wallcount++;
                             }
                         }
                     }
+                }    
+                wallcount = 0;
+            }
+        }
+        public void addObjects()
+        {
+            int trapcount = 0;
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    objects[i, j] = filler;
                 }
             }
+            for (int a = 0; a < 4; a++)
+            {
+                for (int i = Blocks[a,0]; i < Blocks[a, 1]; i++)
+                {
+                    for (int j = Blocks[a, 2]; j < Blocks[a, 3]; j++)
+                    {
+                        if (trapcount < 5 && rand.Next(1, 6) == 1 && objects[i + 1, j] != trap && objects[i - 1, j] != trap && objects[i, j + 1] != trap && objects[i, j - 1] != trap && objects[i + 1, j + 1] != trap && objects[i + 1, j - 1] != trap && objects[i - 1, j + 1] != trap && objects[i - 1, j - 1] != trap)
+                        {
+                            if (starter_room[i, j] != wall)
+                            {
+                                objects[i, j] = trap;
+                                trapcount++;
+                            }
+                        }
+                    }
+                }   
+            }
+
             objects[1, 0] = torch;
             objects[1, 9] = torch;
             objects[8, 0] = torch;
@@ -113,6 +124,37 @@ namespace Adventurer.Sprites.Map
             objects[0, 8] = torch;
             objects[9, 8] = torch;
 
+
+        }
+        private void sections()
+        {
+            int[] firstblock = new int[] { 2, 5, 2, 5 };
+            int[] secondblock = new int[] { 5, 8, 2, 5 };
+            int[] thirdblock = new int[] { 2, 5, 5, 8 };
+            int[] fourthblock = new int[] { 5, 8, 5, 8 };
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (i == 0)
+                    {
+                        Blocks[i, j] = firstblock[j];
+                    }
+                    if (i == 1)
+                    {
+                        Blocks[i, j] = secondblock[j];
+                    }
+                    if (i == 2)
+                    {
+                        Blocks[i, j] = thirdblock[j];
+                    }
+                    if (i == 3)
+                    {
+                        Blocks[i, j] = fourthblock[j];
+                    }
+                }
+            }
         }
     }
 }

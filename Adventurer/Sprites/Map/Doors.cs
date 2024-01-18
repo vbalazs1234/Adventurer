@@ -10,19 +10,24 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Adventurer.Sprites.Map
 {
-    internal class Doors : Game
+    internal class Doors
     {
-        
-        public  Texture2D doorTopLeft;
-        public  Texture2D doorTopRight;
-        public  Texture2D doorBottomLeft;
-        public  Texture2D doorBottomRight;
-        public Texture2D doorLeftLeft;
-        public Texture2D doorLeftRight;
-        public Texture2D doorRightLeft;
-        public Texture2D doorRightRight;
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+
+        public static Texture2D doorTopLeft;
+        public static Texture2D doorTopRight;
+        public static Texture2D doorBottomLeft;
+        public static Texture2D doorBottomRight;
+        public static Texture2D doorLeftLeft;
+        public static Texture2D doorLeftRight;
+        public static Texture2D doorRightLeft;
+        public static Texture2D doorRightRight;
         public Doors()
         {
+        }
+        public void LoadContent(ContentManager Content)
+        { 
             doorBottomLeft = Content.Load<Texture2D>("Maps/Doors/doorBottomLeft");
             doorBottomRight = Content.Load<Texture2D>("Maps/Doors/doorBottomRight");
             doorTopLeft = Content.Load<Texture2D>("Maps/Doors/doorTopLeft");
@@ -31,7 +36,6 @@ namespace Adventurer.Sprites.Map
             doorLeftRight = Content.Load<Texture2D>("Maps/Doors/doorLeftRight");
             doorRightLeft = Content.Load<Texture2D>("Maps/Doors/doorRightLeft");
             doorRightRight = Content.Load<Texture2D>("Maps/Doors/doorRightRight");
-            
         }
     }
 }

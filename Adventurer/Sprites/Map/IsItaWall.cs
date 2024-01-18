@@ -13,7 +13,7 @@ namespace Adventurer.Sprites.Map
     {
         public static List<Sprite> spriteses;
         
-        public bool Is_it_a_wall_upward(Vector2 Position)
+        public int Is_it_a_wall_upward(Vector2 Position)
         {
             foreach (var item in spriteses)
             {
@@ -21,13 +21,17 @@ namespace Adventurer.Sprites.Map
                 {
                     if (item.Texture.Name == "Maps/wall")
                     {
-                        return true;
+                        return 1;
+                    }
+                    else if(item.Texture.Name == "Maps/Doors/doorTopLeft" ||  item.Texture.Name == "Maps/Doors/doorTopRight")
+                    {
+                        return 2;
                     }
                 }
             }
-            return false;
+            return 0;
         }
-        public bool Is_it_a_wall_downward(Vector2 Position)
+        public int Is_it_a_wall_downward(Vector2 Position)
         {
             foreach (var item in spriteses)
             {
@@ -35,13 +39,17 @@ namespace Adventurer.Sprites.Map
                 {
                     if (item.Texture.Name == "Maps/wall")
                     {
-                        return true;
+                        return 1;
+                    }
+                    else if(item.Texture.Name == "Maps/Doors/doorBottomLeft" || item.Texture.Name == "Maps/Doors/doorBottomRight")
+                    {
+                        return 2;
                     }
                 }
             }
-            return false;
+            return 0;
         }
-        public bool Is_it_a_wall_left(Vector2 Position)
+        public int Is_it_a_wall_left(Vector2 Position)
         {
             foreach (var item in spriteses)
             {
@@ -49,13 +57,17 @@ namespace Adventurer.Sprites.Map
                 {
                     if (item.Texture.Name == "Maps/wall")
                     {
-                        return true;
+                        return 1;
+                    }
+                    else if(item.Texture.Name == "Maps/Doors/doorLeftLeft" || item.Texture.Name == "Maps/Doors/doorLeftRight")
+                    {
+                        return 2;
                     }
                 }
             }
-            return false;
+            return 0;
         }
-        public bool Is_it_a_wall_right(Vector2 Position)
+        public int Is_it_a_wall_right(Vector2 Position)
         {
             foreach (var item in spriteses)
             {
@@ -63,11 +75,15 @@ namespace Adventurer.Sprites.Map
                 {
                     if (item.Texture.Name == "Maps/wall")
                     {
-                        return true;
+                        return 1;
+                    }
+                    else if(item.Texture.Name == "Maps/Doors/doorRightLeft" || item.Texture.Name == "Maps/Doors/doorRightRight")
+                    {
+                        return 2;
                     }
                 }
             }
-            return false;
+            return 0;
         }
     }
 }
