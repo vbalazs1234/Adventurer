@@ -102,6 +102,7 @@ namespace Adventurer
           
             base.Update(gameTime);
             previousKeyboardState = keyboardState;
+            _menu.
         }
 
         protected override void Draw(GameTime gameTime)
