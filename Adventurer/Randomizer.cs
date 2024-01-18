@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Adventurer
 {
-    internal class Randomizer
+    internal static class Randomizer
     {
-        protected int RandomNum()
+        public static int RandomNum()
         {
             Random r = new Random();
             return r.Next(1,7);

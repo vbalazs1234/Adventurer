@@ -5,6 +5,7 @@ using Adventurer.Sprites;
 using System.Collections.Generic;
 using Adventurer.Sprites.Map;
 using Microsoft.Xna.Framework.Media;
+using Adventurer.UI;
 
 namespace Adventurer
 {
@@ -15,19 +16,25 @@ namespace Adventurer
         List<Sprite> sprites;
         MapsInOne maps = new MapsInOne();
         MapLoader mapLoader = new MapLoader();
+        private Menu _menu;
+        private bool IsMenuVisible;
+        private KeyboardState previousKeyboardState; 
+ 
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
 
-
+            _menu = new Menu(this);
+            IsMenuVisible = false;
             base.Initialize();
 
         }
@@ -62,8 +69,7 @@ namespace Adventurer
         protected override void Update(GameTime gameTime)
         {
           
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            
            
             // TODO: Add your update logic here
             foreach (var sprite in sprites)
@@ -87,12 +93,20 @@ namespace Adventurer
                 MapsInOne.PreviousPlayerMapPosition_Y = MapsInOne.PlayerMapPosition_Y;
             }
             sprites[sprites.Count-1].Texture = Content.Load<Texture2D>(Player.player_image_name);
-   
+            
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Escape) && !previousKeyboardState.IsKeyDown(Keys.Escape))
+            {
+                IsMenuVisible =  !IsMenuVisible;
+            }
+          
             base.Update(gameTime);
+            previousKeyboardState = keyboardState;
         }
 
         protected override void Draw(GameTime gameTime)
         {
+
             GraphicsDevice.Clear(Color.SlateGray);
 
             // TODO: Add your drawing code here
@@ -102,6 +116,10 @@ namespace Adventurer
                 sprite.Draw(_spriteBatch);
             }
             _spriteBatch.End();
+            if (IsMenuVisible)
+            {
+                _menu.Draw();
+            }
             base.Draw(gameTime);
         }
     }

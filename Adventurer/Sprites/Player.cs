@@ -13,14 +13,30 @@ namespace Adventurer.Sprites
 {
     internal class Player : Sprite
     {
+        public int MaxHp;
+        public int ActualHp;
+        public int DefensePoint;
+        public int Damage;
         public static string player_image_name = "Hero/hero-down";
         private Texture2D player_image;
         public bool canMove = true;
-        public static bool doorunlocked=true;
+        public static bool doorunlocked = true;
         private IsItaWall isItaWall = new IsItaWall();
         public Player(Texture2D texture, Vector2 position) : base(texture, position)
         {
             player_image = texture;
+            MaxHp = 20 + 3 * Randomizer.RandomNum();
+            ActualHp = MaxHp;
+            DefensePoint = 2 * Randomizer.RandomNum();
+            Damage = 5 + Randomizer.RandomNum();
+        }
+
+        public void LevelUp()
+        {
+            MaxHp += Randomizer.RandomNum();
+            ActualHp = MaxHp;
+            DefensePoint += Randomizer.RandomNum();
+            Damage += Randomizer.RandomNum();
         }
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics )
