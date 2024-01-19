@@ -22,6 +22,7 @@ namespace Adventurer
         public void LoadContent(ContentManager Content)
         {
             BackgroundMusic = Content.Load<Song>("Sounds/background-music");
+          
         }
 
         public static void PlayMusic()
