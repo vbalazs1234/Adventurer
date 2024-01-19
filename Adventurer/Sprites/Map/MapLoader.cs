@@ -14,6 +14,7 @@ namespace Adventurer.Sprites.Map
         List<Sprite> sprites;
         public List<Sprite> loadMap(MapsInOne maps)
         {
+            maps.chanegeDoor();
             sprites = new();
             int distance = Maps.floor.Height;
             for (int a = 0; a < 2; a++)

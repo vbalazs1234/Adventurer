@@ -12,7 +12,7 @@ namespace Adventurer.Sprites.Map
     internal class IsItaWall
     {
         public static List<Sprite> spriteses;
-        
+
         public int Is_it_a_wall_upward(Vector2 Position)
         {
             foreach (var item in spriteses)
@@ -26,6 +26,10 @@ namespace Adventurer.Sprites.Map
                     else if(item.Texture.Name == "Maps/Doors/doorTopLeft" ||  item.Texture.Name == "Maps/Doors/doorTopRight")
                     {
                         return 2;
+                    }
+                    else if(item.Texture.Name == "Maps/key")
+                    {
+                        return 3;
                     }
                 }
             }
@@ -63,6 +67,10 @@ namespace Adventurer.Sprites.Map
                     {
                         return 2;
                     }
+                    else if (item.Texture.Name == "Maps/key")
+                    {
+                        return 3;   
+                    }
                 }
             }
             return 0;
@@ -80,6 +88,14 @@ namespace Adventurer.Sprites.Map
                     else if(item.Texture.Name == "Maps/Doors/doorRightLeft" || item.Texture.Name == "Maps/Doors/doorRightRight")
                     {
                         return 2;
+                    }
+                    else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right")
+                    {
+                        return 3;
+                    }
+                    else if(item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left-closed" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right-closed")
+                    {
+                        return 4;
                     }
                 }
             }

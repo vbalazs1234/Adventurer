@@ -73,6 +73,54 @@
 /processorParam:TextureFormat=Color
 /build:Hero/hero-up.png
 
+#begin Maps/Doors/BossRoom/boss-room-door-left-closed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Maps/Doors/BossRoom/boss-room-door-left-closed.png
+
+#begin Maps/Doors/BossRoom/boss-room-door-left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Maps/Doors/BossRoom/boss-room-door-left.png
+
+#begin Maps/Doors/BossRoom/boss-room-door-right-closed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Maps/Doors/BossRoom/boss-room-door-right-closed.png
+
+#begin Maps/Doors/BossRoom/boss-room-door-right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Maps/Doors/BossRoom/boss-room-door-right.png
+
 #begin Maps/Doors/doorBottomLeft.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -204,6 +252,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Maps/hero-map.png
+
+#begin Maps/key.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Maps/key.png
 
 #begin Maps/torch.png
 /importer:TextureImporter

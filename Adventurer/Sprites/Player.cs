@@ -43,6 +43,11 @@ namespace Adventurer.Sprites
                             MapsInOne.PlayerMapPosition_Y--;
                         }
                         break;
+                    case 3:
+                        MapsInOne.isOpened = true;
+                        Position.Y -= player_image.Height;
+                        player_image_name = "Hero/hero-up";
+                        break;
                     default:
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
@@ -88,6 +93,11 @@ namespace Adventurer.Sprites
                             MapsInOne.PlayerMapPosition_X--;
                         }
                         break;
+                    case 3:
+                        MapsInOne.isOpened = true;
+                        Position.X -= player_image.Width;
+                        player_image_name = "Hero/hero-left";
+                        break;
                     default:
                 Position.X -= player_image.Width;
                 player_image_name = "Hero/hero-left";
@@ -109,6 +119,13 @@ namespace Adventurer.Sprites
                             Position.X = 0 + player_image.Width;
                             MapsInOne.PlayerMapPosition_X++;
                         }
+                        break;
+                    case 3:
+                        player_image_name = "Hero/hero-right";
+                        Position.X = 0 + player_image.Width;
+                        break;
+                    case 4:
+                        player_image_name = "Hero/hero-right";
                         break;
                     default:
                     Position.X += player_image.Width;

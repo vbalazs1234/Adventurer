@@ -15,6 +15,7 @@ namespace Adventurer
         List<Sprite> sprites;
         MapsInOne maps = new MapsInOne();
         MapLoader mapLoader = new MapLoader();
+        Texture2D playertexture;
 
         public Game1()
         {
@@ -54,7 +55,7 @@ namespace Adventurer
             _graphics.ApplyChanges();
             #endregion
             IsItaWall.spriteses = sprites;
-            Texture2D playertexture = Content.Load<Texture2D>("Hero/hero-down");
+            playertexture = Content.Load<Texture2D>("Hero/hero-down");
             sprites.Add(new Player(playertexture, new Vector2(distance *5,distance *5)));
           
         }

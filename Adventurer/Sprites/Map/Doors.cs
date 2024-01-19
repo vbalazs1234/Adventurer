@@ -23,19 +23,29 @@ namespace Adventurer.Sprites.Map
         public static Texture2D doorLeftRight;
         public static Texture2D doorRightLeft;
         public static Texture2D doorRightRight;
+        public static Texture2D bossRoomRightClosed;
+        public static Texture2D bossRoomLeftClosed;
+        public static Texture2D bossRoomRightOpened;
+        public static Texture2D bossRoomLeftOpened;
+        public static Texture2D bossRoomDoorKey;
         public Doors()
         {
         }
         public void LoadContent(ContentManager Content)
-        { 
+        {
             doorBottomLeft = Content.Load<Texture2D>("Maps/Doors/doorBottomLeft");
             doorBottomRight = Content.Load<Texture2D>("Maps/Doors/doorBottomRight");
             doorTopLeft = Content.Load<Texture2D>("Maps/Doors/doorTopLeft");
-            doorTopRight  = Content.Load<Texture2D>("Maps/Doors/doorTopRight");
+            doorTopRight = Content.Load<Texture2D>("Maps/Doors/doorTopRight");
             doorLeftLeft = Content.Load<Texture2D>("Maps/Doors/doorLeftLeft");
             doorLeftRight = Content.Load<Texture2D>("Maps/Doors/doorLeftRight");
             doorRightLeft = Content.Load<Texture2D>("Maps/Doors/doorRightLeft");
             doorRightRight = Content.Load<Texture2D>("Maps/Doors/doorRightRight");
+            bossRoomRightClosed = Content.Load<Texture2D>("Maps/Doors/BossRoom/boss-room-door-right-closed");
+            bossRoomLeftClosed = Content.Load<Texture2D>("Maps/Doors/BossRoom/boss-room-door-left-closed");
+            bossRoomRightOpened = Content.Load<Texture2D>("Maps/Doors/BossRoom/boss-room-door-right");
+            bossRoomLeftOpened = Content.Load<Texture2D>("Maps/Doors/BossRoom/boss-room-door-left");
+            bossRoomDoorKey = Content.Load<Texture2D>("Maps/key");
         }
     }
 }

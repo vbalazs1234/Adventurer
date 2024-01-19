@@ -13,6 +13,7 @@ namespace Adventurer.Sprites.Map
         public static int PlayerMapPosition_Y = 2;
         public static int PreviousPlayerMapPosition_X = 2;
         public static int PreviousPlayerMapPosition_Y = 2;
+        public static bool isOpened = false;
         public MapsInOne()
         {
             maps = new Maps[5,5];
@@ -25,6 +26,24 @@ namespace Adventurer.Sprites.Map
                 {
                     Maps map = new Maps(i,j);
                     maps[i, j] = map;
+                }
+            }
+        }
+        public void chanegeDoor()
+        {
+            if (PlayerMapPosition_X == 4 && PlayerMapPosition_Y == 2)
+            {
+                
+
+                if (isOpened)
+                {
+                    maps[2,4].starter_room[4, 9] = Doors.bossRoomLeftOpened;
+                    maps[2,4].starter_room[5, 9] = Doors.bossRoomRightOpened;
+                }
+                else
+                {
+                    maps[2,4].starter_room[4, 9] = Doors.bossRoomLeftClosed;
+                    maps[2,4].starter_room[5, 9] = Doors.bossRoomRightClosed;
                 }
             }
         }

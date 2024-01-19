@@ -32,7 +32,7 @@ namespace Adventurer.Sprites.Map
             {
                 basicMapGen(aPozition,bPozition);
                 RandomWalls();
-                addObjects();
+                addObjects(aPozition, bPozition);
             }
         }
         public void LoadContent(ContentManager Content)
@@ -49,7 +49,7 @@ namespace Adventurer.Sprites.Map
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if (i == 0 && j == 4 && aPozition!=0) starter_room[i, j] = Doors.doorTopLeft;
+                    if (i == 0 && j == 4 && aPozition != 0) starter_room[i, j] = Doors.doorTopLeft;
                     else if (i == 0 && j == 5 && aPozition != 0) starter_room[i, j] = Doors.doorTopRight;
                     else if (i == 9 && j == 4 && aPozition != 4) starter_room[i, j] = Doors.doorBottomLeft;
                     else if (i == 9 && j == 5 && aPozition != 4) starter_room[i, j] = Doors.doorBottomRight;
@@ -57,6 +57,8 @@ namespace Adventurer.Sprites.Map
                     else if (i == 5 && j == 0 && bPozition != 0) starter_room[i, j] = Doors.doorLeftLeft;
                     else if (i == 4 && j == 9 && bPozition != 4) starter_room[i, j] = Doors.doorRightLeft;
                     else if (i == 5 && j == 9 && bPozition != 4) starter_room[i, j] = Doors.doorRightRight;
+                    else if (i == 4 && j == 9 && bPozition == 4 && aPozition == 2) starter_room[i, j] = Doors.bossRoomLeftClosed;
+                    else if (i == 5 && j == 9 && bPozition == 4 && aPozition == 2) starter_room[i, j] = Doors.bossRoomRightClosed;
                     else if (i == 0 || j == 0 || i == 9 || j == 9) starter_room[i, j] = wall;
                     else starter_room[i, j] = floor;
                 }
@@ -86,7 +88,7 @@ namespace Adventurer.Sprites.Map
                 wallcount = 0;
             }
         }
-        public void addObjects()
+        public void addObjects(int aPozition, int bPozition)
         {
             int trapcount = 0;
 
@@ -114,7 +116,10 @@ namespace Adventurer.Sprites.Map
                     }
                 }   
             }
-
+            if (aPozition == 0 && bPozition == 0)
+            {
+                objects[1, 1] = Doors.bossRoomDoorKey;
+            }
             objects[1, 0] = torch;
             objects[1, 9] = torch;
             objects[8, 0] = torch;
