@@ -49,6 +49,10 @@ namespace Adventurer.Sprites.Map
                     {
                         return 2;
                     }
+                    else if (item.Texture.Name == "Maps/key")
+                    {
+                        return 3;
+                    }
                 }
             }
             return 0;
@@ -85,17 +89,21 @@ namespace Adventurer.Sprites.Map
                     {
                         return 1;
                     }
-                    else if(item.Texture.Name == "Maps/Doors/doorRightLeft" || item.Texture.Name == "Maps/Doors/doorRightRight")
+                    else if (item.Texture.Name == "Maps/Doors/doorRightLeft" || item.Texture.Name == "Maps/Doors/doorRightRight")
                     {
                         return 2;
                     }
-                    else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right")
+                    else if (item.Texture.Name == "Maps/key")
                     {
                         return 3;
                     }
-                    else if(item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left-closed" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right-closed")
+                    else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right")
                     {
                         return 4;
+                    }
+                    else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left-closed" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right-closed")
+                    {
+                        return 5;
                     }
                 }
             }

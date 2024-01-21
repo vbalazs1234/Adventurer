@@ -76,6 +76,14 @@ namespace Adventurer
             {
                 sprite.Update(gameTime,_graphics);
             }
+            if (MapsInOne.objectChange)
+            {
+                for (int i = 0; i < sprites.Count - 2; i++)
+                {
+                    sprites[i] = mapLoader.loadMap(maps)[i];
+                }
+                MapsInOne.objectChange = false;
+            }
             if (MapsInOne.PreviousPlayerMapPosition_X != MapsInOne.PlayerMapPosition_X)
             {
                 for (int i = 0; i < sprites.Count-2; i++)

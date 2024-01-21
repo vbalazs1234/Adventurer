@@ -14,12 +14,16 @@ namespace Adventurer.Sprites.Map
         public static int PreviousPlayerMapPosition_X = 2;
         public static int PreviousPlayerMapPosition_Y = 2;
         public static bool isOpened = false;
+        public static bool objectChange = false;
+        private Random rand = new Random(); 
         public MapsInOne()
         {
             maps = new Maps[5,5];
         }
         public void fill()
         {
+            Maps.keyRoomPozition_X = rand.Next(0, 5);
+            Maps.keyRoomPozition_Y = rand.Next(0, 5);
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -31,6 +35,10 @@ namespace Adventurer.Sprites.Map
         }
         public void chanegeDoor()
         {
+            if(objectChange)
+            {
+                maps[Maps.keyRoomPozition_Y,Maps.keyRoomPozition_X].objects[Maps.keyInsideRoomPozition_Y, Maps.keyInsideRoomPozition_X] = Maps.filler;
+            }
             if (PlayerMapPosition_X == 4 && PlayerMapPosition_Y == 2)
             {
                 

@@ -22,12 +22,16 @@ namespace Adventurer.Sprites.Map
         public static Texture2D wall;
         public static Texture2D floor;
         public static Texture2D filler;
+        public static int keyRoomPozition_X;
+        public static int keyRoomPozition_Y;
+        public static int keyInsideRoomPozition_X;
+        public static int keyInsideRoomPozition_Y;
 
         public Texture2D[,] starter_room = new Texture2D[10, 10];
         public Texture2D[,] objects = new Texture2D[10, 10];
         int[,] Blocks = new int[4, 4];
         public Maps(int aPozition, int bPozition)
-        {
+        { 
             if (torch != null)
             {
                 basicMapGen(aPozition,bPozition);
@@ -76,7 +80,7 @@ namespace Adventurer.Sprites.Map
                     {
                         if (wallcount < 3 && rand.Next(1, 6) == 1 )
                         {
-                            if (i == 5 && j == 5) ;
+                            if (i == 5 && j == 5) starter_room[i, j] = floor; 
                             else
                             {
                             starter_room[i, j] = wall;
@@ -116,9 +120,20 @@ namespace Adventurer.Sprites.Map
                     }
                 }   
             }
-            if (aPozition == 0 && bPozition == 0)
+            if (aPozition == keyRoomPozition_Y && bPozition == keyRoomPozition_X)
             {
-                objects[1, 1] = Doors.bossRoomDoorKey;
+                bool keyExists=true;
+                do
+                {
+                    keyInsideRoomPozition_X = rand.Next(1, 9);
+                    keyInsideRoomPozition_Y = rand.Next(1, 9);
+                    if (starter_room[keyInsideRoomPozition_Y, keyInsideRoomPozition_X].Name == "Maps/floor")
+                    {
+                        objects[keyInsideRoomPozition_Y, keyInsideRoomPozition_X] = Doors.bossRoomDoorKey;
+                        keyExists = false;
+                    }
+                } while (keyExists);
+                
             }
             objects[1, 0] = torch;
             objects[1, 9] = torch;

@@ -39,7 +39,7 @@ namespace Adventurer.Sprites
             Damage += Randomizer.RandomNum();
         }
 
-        public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics )
+        public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics)
         {
             base.Update(gameTime,_graphics);
             #region Movement
@@ -61,6 +61,7 @@ namespace Adventurer.Sprites
                         break;
                     case 3:
                         MapsInOne.isOpened = true;
+                        MapsInOne.objectChange= true;
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
                         break;
@@ -86,7 +87,13 @@ namespace Adventurer.Sprites
                             MapsInOne.PlayerMapPosition_Y++;
                         }
                         break;
-                default:
+                    case 3:
+                        MapsInOne.isOpened = true;
+                        MapsInOne.objectChange = true;
+                        Position.Y += player_image.Height;
+                        player_image_name = "Hero/hero-down";
+                        break;
+                    default:
                 
                     Position.Y += player_image.Height;
                     player_image_name = "Hero/hero-down";
@@ -111,6 +118,7 @@ namespace Adventurer.Sprites
                         break;
                     case 3:
                         MapsInOne.isOpened = true;
+                        MapsInOne.objectChange = true;
                         Position.X -= player_image.Width;
                         player_image_name = "Hero/hero-left";
                         break;
@@ -137,10 +145,16 @@ namespace Adventurer.Sprites
                         }
                         break;
                     case 3:
+                        MapsInOne.isOpened = true;
+                        MapsInOne.objectChange = true;
+                        Position.X += player_image.Width;
+                        player_image_name = "Hero/hero-right";
+                        break;
+                    case 4:
                         player_image_name = "Hero/hero-right";
                         Position.X = 0 + player_image.Width;
                         break;
-                    case 4:
+                    case 5:
                         player_image_name = "Hero/hero-right";
                         break;
                     default:

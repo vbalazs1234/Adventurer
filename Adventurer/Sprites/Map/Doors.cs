@@ -12,9 +12,6 @@ namespace Adventurer.Sprites.Map
 {
     internal class Doors
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-
         public static Texture2D doorTopLeft;
         public static Texture2D doorTopRight;
         public static Texture2D doorBottomLeft;
