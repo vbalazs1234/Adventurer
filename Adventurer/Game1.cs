@@ -17,7 +17,7 @@ namespace Adventurer
         MapsInOne maps = new MapsInOne();
         MapLoader mapLoader = new MapLoader();
         private Menu _menu;
-        private bool IsMenuVisible;
+        public static bool IsMenuVisible;
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
 

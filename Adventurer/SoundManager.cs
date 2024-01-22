@@ -41,6 +41,10 @@ namespace Adventurer
                 MediaPlayer.Stop();
             }
         }
+        public void SetMusicVolume(float volume)
+        {
+            MediaPlayer.Volume = volume;
+        }
         public void Update()
         {
             // Check and handle any necessary updates
