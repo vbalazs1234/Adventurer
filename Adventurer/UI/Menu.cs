@@ -32,21 +32,35 @@ namespace Adventurer.UI
         private void Initialize()
         {
             _soundManager = new SoundManager();
+            var window = new Window
+            {
+                Title = "Game Menu",
+                Width = 300,
+                Height = 400,
+                Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray)
+
+            };
+            _desktop.Widgets.Add(window);
             var grid = new Grid
             {
-                RowSpacing = 4,
-                ColumnSpacing = 4
-            };
-
-            var verticalMenu = new VerticalMenu
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                LabelColor = Microsoft.Xna.Framework.Color.Blue,
-                LabelHorizontalAlignment = HorizontalAlignment.Center,
-                Id = "_mainMenu"
                 
+                RowSpacing = 1,
+                ColumnSpacing = 1,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+
             };
+            window.Content = grid;
+            Grid.SetColumn(window, 0);
+            Grid.SetRow(window, 0);
+            Grid.SetColumnSpan(window, 1);  // Set the column span to the number of columns in your grid
+            Grid.SetRowSpan(window, 1);
+
+            grid.ColumnsProportions.Add(new Proportion());
+            grid.RowsProportions.Add(new Proportion());
+            grid.RowsProportions.Add(new Proportion());
+            grid.RowsProportions.Add(new Proportion());
+
 
             var titleLabel = new Label
             {
@@ -54,6 +68,7 @@ namespace Adventurer.UI
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Top,
                 Margin = new Thickness(5),
+                
                
             };
             grid.Widgets.Add(titleLabel);
@@ -130,9 +145,6 @@ namespace Adventurer.UI
             _desktop.Render();
         }
 
-        public void Continue(Game game)
-        {
-
-        }
+       
     }
 }
