@@ -18,6 +18,7 @@ namespace Adventurer.UI
     {
         private Desktop _desktop;
         private Game1 _game;
+        private SoundManager _soundManager;
 
         public Menu(Game1 game)
         {
@@ -30,32 +31,66 @@ namespace Adventurer.UI
 
         private void Initialize()
         {
+            _soundManager = new SoundManager();
+            var window = new Window
+            {
+                Title = "Game Menu",
+                Width = 300,
+                Height = 400,
+                Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray)
 
+            };
+            _desktop.Widgets.Add(window);
             var grid = new Grid
             {
-                RowSpacing = 4,
-                ColumnSpacing = 4
+                
+                RowSpacing = 1,
+                ColumnSpacing = 1,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+
             };
+            window.Content = grid;
+            Grid.SetColumn(window, 0);
+            Grid.SetRow(window, 0);
+            Grid.SetColumnSpan(window, 1);  // Set the column span to the number of columns in your grid
+            Grid.SetRowSpan(window, 1);
+
+            grid.ColumnsProportions.Add(new Proportion());
+            grid.RowsProportions.Add(new Proportion());
+            grid.RowsProportions.Add(new Proportion());
+            grid.RowsProportions.Add(new Proportion());
+
 
             var titleLabel = new Label
             {
                 Text = "Wanderer",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Top,
-                Margin = new Thickness(5)
+                Margin = new Thickness(5),
+                
+               
             };
             grid.Widgets.Add(titleLabel);
             Grid.SetColumn(titleLabel, 0);
             Grid.SetRow(titleLabel, 0);
+             
 
             var musicSlider = new HorizontalSlider
             {
                 Minimum = 0,
-                Maximum = 100,
-                Value = 50,
+                Maximum = 1,
                 Width = 200,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(5)
+                Margin = new Thickness(5),
+                Value = 1,
+     
+
+
+            };
+            musicSlider.ValueChanged += (sender, args) =>
+            {
+                _soundManager.SetMusicVolume(musicSlider.Value);
             };
             grid.Widgets.Add(musicSlider);
             Grid.SetColumn(musicSlider, 0);
@@ -72,11 +107,12 @@ namespace Adventurer.UI
 
                 },
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(5)
+                Margin = new Thickness(5),
+    
             };
             continueButton.Click += (sender, args) =>
             {
-                //logic
+                Game1.IsMenuVisible = false;
             };
             grid.Widgets.Add(continueButton);
             Grid.SetColumn(continueButton, 0);
@@ -93,6 +129,8 @@ namespace Adventurer.UI
                 },
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(5)
+                
+
             };
             quitButton.Click += (sender, args) => _game.Exit();
             grid.Widgets.Add(quitButton);
@@ -106,5 +144,7 @@ namespace Adventurer.UI
         {
             _desktop.Render();
         }
+
+       
     }
 }
