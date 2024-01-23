@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Adventurer.Sprites.Map;
 using Microsoft.Xna.Framework.Media;
 using Adventurer.UI;
+using Adventurer.Sprites.Item;
 
 namespace Adventurer
 {
@@ -17,6 +18,7 @@ namespace Adventurer
         MapsInOne maps = new MapsInOne();
         MapLoader mapLoader = new MapLoader();
         private Menu _menu;
+        private PopUpText _popuptext;
         private bool IsMenuVisible;
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
@@ -34,6 +36,7 @@ namespace Adventurer
             // TODO: Add your initialization logic here
 
             _menu = new Menu(this);
+            _popuptext = new PopUpText(this);
             IsMenuVisible = false;
             base.Initialize();
 
@@ -43,11 +46,13 @@ namespace Adventurer
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Doors doors = new Doors();
+            Objects objects = new Objects();
             SoundManager sound = new SoundManager();
             Maps beformaps = new Maps(1,1);
             doors.LoadContent(Content);
             sound.LoadContent(Content);
             beformaps.LoadContent(Content);
+            objects.LoadContent(Content);
            
             maps.fill();
             SoundManager.PlayMusic();
@@ -128,6 +133,10 @@ namespace Adventurer
             if (IsMenuVisible)
             {
                 _menu.Draw();
+            }
+            if(PopUpText.showTexts)
+            {
+                _popuptext.Draw();
             }
             base.Draw(gameTime);
         }
