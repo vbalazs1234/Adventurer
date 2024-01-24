@@ -11,6 +11,7 @@ using Myra.Graphics2D.UI.Styles;
 using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Myra.Graphics2D;
+using FontStashSharp;
 
 namespace Adventurer.UI
 {
@@ -74,10 +75,10 @@ namespace Adventurer.UI
             grid.Widgets.Add(titleLabel);
             Grid.SetColumn(titleLabel, 0);
             Grid.SetRow(titleLabel, 0);
-             
 
             var musicSlider = new HorizontalSlider
             {
+                
                 Minimum = 0,
                 Maximum = 1,
                 Width = 200,
@@ -88,13 +89,26 @@ namespace Adventurer.UI
 
 
             };
+
+            var textBox = new Label
+            {
+                Width = 50,
+                Text = $"{Math.Round(musicSlider.Value*100),0}" + "%",
+            };
+
             musicSlider.ValueChanged += (sender, args) =>
             {
                 _soundManager.SetMusicVolume(musicSlider.Value);
+                textBox.Text = $"{Math.Round(musicSlider.Value*100),0}" + "%";
+
+
             };
             grid.Widgets.Add(musicSlider);
             Grid.SetColumn(musicSlider, 0);
-            Grid.SetRow(musicSlider, 1);
+            Grid.SetRow(musicSlider, 2);
+            grid.Widgets.Add(textBox);
+            Grid.SetColumn(textBox, 0);
+            Grid.SetRow(textBox, 3);
 
             var continueButton = new Button
             {
@@ -116,7 +130,7 @@ namespace Adventurer.UI
             };
             grid.Widgets.Add(continueButton);
             Grid.SetColumn(continueButton, 0);
-            Grid.SetRow(continueButton, 2);
+            Grid.SetRow(continueButton, 3);
 
             var quitButton = new Button
             {
@@ -135,15 +149,17 @@ namespace Adventurer.UI
             quitButton.Click += (sender, args) => _game.Exit();
             grid.Widgets.Add(quitButton);
             Grid.SetColumn(quitButton, 0);
-            Grid.SetRow(quitButton, 3);
+            Grid.SetRow(quitButton, 4);
 
 
         }
+
+      
         public void Draw()
         {
             _desktop.Render();
         }
 
-       
+  
     }
 }
