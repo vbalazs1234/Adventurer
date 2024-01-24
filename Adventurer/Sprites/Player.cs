@@ -74,7 +74,6 @@ namespace Adventurer.Sprites
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
-                        inv.collectedItemCount++;
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
                         break;
@@ -109,7 +108,6 @@ namespace Adventurer.Sprites
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
-                        inv.collectedItemCount++;
                         Position.Y += player_image.Height;
                         player_image_name = "Hero/hero-down";
                         break;
@@ -144,7 +142,6 @@ namespace Adventurer.Sprites
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
-                        inv.collectedItemCount++;
                         Position.X -= player_image.Width;
                         player_image_name = "Hero/hero-left";
                         break;
@@ -179,7 +176,6 @@ namespace Adventurer.Sprites
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
-                        inv.collectedItemCount++;
                         Position.X += player_image.Width;
                         player_image_name = "Hero/hero-right";
                         break;

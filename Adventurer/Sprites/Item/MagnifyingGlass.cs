@@ -20,7 +20,7 @@ namespace Adventurer.Sprites.Item
 
         public override void useItem()
         {
-            showText = $"The key is located in Y: {Maps.keyRoomPozition_Y} and X: {Maps.keyRoomPozition_X} room.";
+            showText = $"The key is located in Y: {Maps.keyRoomPozition_Y+1} and X: {Maps.keyRoomPozition_X+1} room.";
             PopUpText text = new PopUpText(showText);
             damageItem();
         }

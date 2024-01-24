@@ -130,13 +130,13 @@ namespace Adventurer
                 sprite.Draw(_spriteBatch);
             }
             _spriteBatch.End();
-            if (IsMenuVisible)
-            {
-                _menu.Draw();
-            }
             if(PopUpText.showTexts)
             {
                 _popuptext.Draw();
+            }
+            if (IsMenuVisible)
+            {
+                _menu.Draw();
             }
             base.Draw(gameTime);
         }

@@ -137,7 +137,6 @@ namespace Adventurer.UI
             Grid.SetColumn(quitButton, 0);
             Grid.SetRow(quitButton, 3);
 
-            _desktop.Root = grid;
 
         }
         public void Draw()

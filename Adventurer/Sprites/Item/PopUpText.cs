@@ -8,6 +8,8 @@ using Myra;
 using Myra.Graphics2D.UI;
 using Myra.Graphics2D;
 using Myra.Graphics2D.TextureAtlases;
+using Microsoft.Xna.Framework;
+using Myra.Graphics2D.Brushes;
 
 namespace Adventurer.Sprites.Item
 {
@@ -17,16 +19,17 @@ namespace Adventurer.Sprites.Item
         private static Desktop _desktop;
         private static Game1 _game;
         private static string _text;
+        private int length;
         public PopUpText(Game1 game)
         {
             _game = game;
             MyraEnvironment.Game = game;
             _desktop = new Desktop();
-            Initialize();
         }
         public PopUpText(string text)
         {
             _text = text;
+            length = text.ToCharArray().Count()*8;
             Initialize();
         }
         private void Initialize()
@@ -36,19 +39,17 @@ namespace Adventurer.Sprites.Item
                 RowSpacing = 4,
                 ColumnSpacing = 4
             };
-            var titleLabel = new Label
+            var window = new Window
             {
-                Text = _text,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(5),
+                Title = _text,
+                Width = length,
+                Height = 25,
+                Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray)
+
             };
-            titleLabel.OverTextColor = Microsoft.Xna.Framework.Color.Black;
-            titleLabel.TextColor = Microsoft.Xna.Framework.Color.Black;
-            grid.Widgets.Add(titleLabel);
-            Grid.SetColumn(titleLabel, 0);
-            Grid.SetRow(titleLabel, 2);
-            _desktop.Root = grid;
+            _desktop.Widgets.Add(window);
+            window.CloseButton.Enabled = false;
+            window.CloseButton.Visible = false;
         }
         public void Draw()
         {
