@@ -22,6 +22,7 @@ namespace Adventurer
         public static bool IsMenuVisible;
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
+        Texture2D enemyTexture;
 
         public Game1()
         {
@@ -66,6 +67,8 @@ namespace Adventurer
             _graphics.ApplyChanges();
             #endregion
             IsItaWall.spriteses = sprites;
+            enemyTexture = Content.Load<Texture2D>("Enemies/Goblin/goblindown");
+            sprites.Add(new Enemy(enemyTexture, new Vector2(distance * 2, distance * 2)));
             playertexture = Content.Load<Texture2D>("Hero/hero-down");
             sprites.Add(new Player(playertexture, new Vector2(distance *5,distance *5)));
           
@@ -79,7 +82,7 @@ namespace Adventurer
             // TODO: Add your update logic here
             foreach (var sprite in sprites)
             {
-                sprite.Update(gameTime,_graphics);
+                sprite.Update(gameTime,_graphics, sprites);
             }
             if (MapsInOne.objectChange)
             {
@@ -112,10 +115,15 @@ namespace Adventurer
             {
                 IsMenuVisible =  !IsMenuVisible;
             }
-          
-            base.Update(gameTime);
             previousKeyboardState = keyboardState;
-            
+            foreach (var sprite in sprites)
+            {
+                if (sprite is Enemy)
+                {
+                    sprite.Update(gameTime, _graphics, sprites);
+                }
+            }
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

@@ -45,9 +45,9 @@ namespace Adventurer.Sprites
             Damage += Randomizer.RandomNum();
         }
 
-        public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics)
+        public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics, List<Sprite> sprites)
         {
-            base.Update(gameTime,_graphics);
+            base.Update(gameTime,_graphics, sprites);
             #region Movement
             if (Keyboard.GetState().IsKeyDown(Keys.W) && canMove != false)
             {
