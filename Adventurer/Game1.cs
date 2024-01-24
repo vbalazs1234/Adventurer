@@ -124,12 +124,32 @@ namespace Adventurer
             {
                 sprite.Draw(_spriteBatch);
             }
+            
+            if (IsMenuVisible)
+            {
+
+                DrawBackgroundWindow(new Rectangle(72 * 3, 36 * 7, 72 * 4, 72 * 3));
+            }
             _spriteBatch.End();
             if (IsMenuVisible)
             {
+                
                 _menu.Draw();
             }
+
+            
+
             base.Draw(gameTime);
+        }
+
+        private void DrawBackgroundWindow(Rectangle rectangle)
+        {
+            // Create a texture for the gray window
+            Texture2D grayTexture = new Texture2D(GraphicsDevice, 1, 1);
+            grayTexture.SetData(new Color[] { Color.Gray });
+
+            // Draw the gray window
+            _spriteBatch.Draw(grayTexture, rectangle, Color.White);
         }
     }
 }
