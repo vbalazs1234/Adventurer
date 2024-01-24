@@ -18,7 +18,6 @@ namespace Adventurer.Sprites.Map
         Random rand = new Random();
 
         public static Texture2D torch;
-        public static Texture2D trap;
         public static Texture2D wall;
         public static Texture2D floor;
         public static Texture2D filler;
@@ -44,8 +43,7 @@ namespace Adventurer.Sprites.Map
             floor = Content.Load<Texture2D>("Maps/floor");
             wall = Content.Load<Texture2D>("Maps/wall");
             torch = Content.Load<Texture2D>("Maps/torch");
-            filler = Content.Load<Texture2D>("Maps/filler");
-            trap = Content.Load<Texture2D>("Maps/trap");
+            filler = Content.Load<Texture2D>("Maps/filler");;
         }
         public void basicMapGen(int aPozition,int bPozition)
         {
@@ -94,7 +92,7 @@ namespace Adventurer.Sprites.Map
         }
         public void addObjects(int aPozition, int bPozition)
         {
-            int trapcount = 0;
+            int chestcount = 0;
 
             for (int i = 0; i < 10; i++)
             {
@@ -109,12 +107,12 @@ namespace Adventurer.Sprites.Map
                 {
                     for (int j = Blocks[a, 2]; j < Blocks[a, 3]; j++)
                     {
-                        if (trapcount < 5 && rand.Next(1, 6) == 1 && objects[i + 1, j] != trap && objects[i - 1, j] != trap && objects[i, j + 1] != trap && objects[i, j - 1] != trap && objects[i + 1, j + 1] != trap && objects[i + 1, j - 1] != trap && objects[i - 1, j + 1] != trap && objects[i - 1, j - 1] != trap)
+                        if (chestcount < 1 && rand.Next(1, 101) == 1)
                         {
                             if (starter_room[i, j] != wall)
                             {
-                                objects[i, j] = trap;
-                                trapcount++;
+                                objects[i, j] = Objects.chest;
+                                chestcount++;
                             }
                         }
                     }

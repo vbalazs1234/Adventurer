@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Adventurer.Sprites.Hero;
+using Adventurer.Sprites.Item;
 using Adventurer.Sprites.Map;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,6 +24,8 @@ namespace Adventurer.Sprites
         public bool canMove = true;
         public static bool doorunlocked = true;
         private IsItaWall isItaWall = new IsItaWall();
+        private Inventory inv;
+        private int selectedItem;
         public Player(Texture2D texture, Vector2 position) : base(texture, position)
         {
             player_image = texture;
@@ -29,6 +33,8 @@ namespace Adventurer.Sprites
             ActualHp = MaxHp;
             DefensePoint = 2 * Randomizer.RandomNum();
             Damage = 5 + Randomizer.RandomNum();
+            selectedItem= 0;
+            inv = new Inventory();
         }
 
         public void LevelUp()
@@ -39,9 +45,9 @@ namespace Adventurer.Sprites
             Damage += Randomizer.RandomNum();
         }
 
-        public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics)
+        public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics, List<Sprite> sprites)
         {
-            base.Update(gameTime,_graphics);
+            base.Update(gameTime,_graphics, sprites);
             #region Movement
             if (Keyboard.GetState().IsKeyDown(Keys.W) && canMove != false)
             {
@@ -62,6 +68,13 @@ namespace Adventurer.Sprites
                     case 3:
                         MapsInOne.isOpened = true;
                         MapsInOne.objectChange= true;
+                        Position.Y -= player_image.Height;
+                        player_image_name = "Hero/hero-up";
+                        break;
+                    case 4:
+                        MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
+                        inv.pickUpItem(magnifyingGlass);
+                        inv.collectedItemCount++;
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
                         break;
@@ -93,8 +106,14 @@ namespace Adventurer.Sprites
                         Position.Y += player_image.Height;
                         player_image_name = "Hero/hero-down";
                         break;
+                    case 4:
+                        MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
+                        inv.pickUpItem(magnifyingGlass);
+                        inv.collectedItemCount++;
+                        Position.Y += player_image.Height;
+                        player_image_name = "Hero/hero-down";
+                        break;
                     default:
-                
                     Position.Y += player_image.Height;
                     player_image_name = "Hero/hero-down";
                     break;
@@ -119,6 +138,13 @@ namespace Adventurer.Sprites
                     case 3:
                         MapsInOne.isOpened = true;
                         MapsInOne.objectChange = true;
+                        Position.X -= player_image.Width;
+                        player_image_name = "Hero/hero-left";
+                        break;
+                    case 4:
+                        MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
+                        inv.pickUpItem(magnifyingGlass);
+                        inv.collectedItemCount++;
                         Position.X -= player_image.Width;
                         player_image_name = "Hero/hero-left";
                         break;
@@ -151,10 +177,17 @@ namespace Adventurer.Sprites
                         player_image_name = "Hero/hero-right";
                         break;
                     case 4:
+                        MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
+                        inv.pickUpItem(magnifyingGlass);
+                        inv.collectedItemCount++;
+                        Position.X += player_image.Width;
+                        player_image_name = "Hero/hero-right";
+                        break;
+                    case 5:
                         player_image_name = "Hero/hero-right";
                         Position.X = 0 + player_image.Width;
                         break;
-                    case 5:
+                    case 6:
                         player_image_name = "Hero/hero-right";
                         break;
                     default:
@@ -163,7 +196,41 @@ namespace Adventurer.Sprites
                         break;
                 }
             }
-            if (Keyboard.GetState().IsKeyUp(Keys.W) && Keyboard.GetState().IsKeyUp(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.D) && canMove == false)
+            if(Keyboard.GetState().IsKeyDown(Keys.E) && canMove != false)
+            {
+                canMove=false;
+                if (selectedItem < 4)
+                {
+                selectedItem++;
+                }
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Q) && canMove != false)
+            {
+                canMove = false;
+                if (selectedItem > 0)
+                {
+                    selectedItem--;
+                }
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.F) && canMove != false)
+            {
+                canMove = false;
+                if (inv.items[selectedItem] != null)
+                {
+                if (PopUpText.showTexts)
+                {
+                    PopUpText.showTexts = false;
+                    inv.RemoveItem(inv.items[selectedItem],selectedItem);
+                }
+                else
+                {
+                    inv.items[selectedItem].useItem();
+                    PopUpText.showTexts = true;
+                }
+                }
+                
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.F) && Keyboard.GetState().IsKeyUp(Keys.Q) && Keyboard.GetState().IsKeyUp(Keys.E) && Keyboard.GetState().IsKeyUp(Keys.W) && Keyboard.GetState().IsKeyUp(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.D) && canMove == false)
             {
                 canMove = true;
             }

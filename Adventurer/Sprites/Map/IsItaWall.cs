@@ -31,6 +31,10 @@ namespace Adventurer.Sprites.Map
                     {
                         return 3;
                     }
+                    else if (item.Texture.Name == "Maps/Objects/chest")
+                    {
+                        return 4;
+                    }
                 }
             }
             return 0;
@@ -52,6 +56,10 @@ namespace Adventurer.Sprites.Map
                     else if (item.Texture.Name == "Maps/key")
                     {
                         return 3;
+                    }
+                    else if (item.Texture.Name == "Maps/Objects/chest")
+                    {
+                        return 4;
                     }
                 }
             }
@@ -75,6 +83,10 @@ namespace Adventurer.Sprites.Map
                     {
                         return 3;   
                     }
+                    else if (item.Texture.Name == "Maps/Objects/chest")
+                    {
+                        return 4;
+                    }
                 }
             }
             return 0;
@@ -97,13 +109,17 @@ namespace Adventurer.Sprites.Map
                     {
                         return 3;
                     }
-                    else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right")
+                    else if (item.Texture.Name == "Maps/Objects/chest")
                     {
                         return 4;
                     }
-                    else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left-closed" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right-closed")
+                    else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right")
                     {
                         return 5;
+                    }
+                    else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left-closed" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right-closed")
+                    {
+                        return 6;
                     }
                 }
             }

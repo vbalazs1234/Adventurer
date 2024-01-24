@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Adventurer.Sprites.Map;
 using Microsoft.Xna.Framework.Media;
 using Adventurer.UI;
+using Adventurer.Sprites.Item;
 
 namespace Adventurer
 {
@@ -17,9 +18,11 @@ namespace Adventurer
         MapsInOne maps = new MapsInOne();
         MapLoader mapLoader = new MapLoader();
         private Menu _menu;
+        private PopUpText _popuptext;
         public static bool IsMenuVisible;
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
+        Texture2D enemyTexture;
 
         public Game1()
         {
@@ -34,6 +37,7 @@ namespace Adventurer
             // TODO: Add your initialization logic here
 
             _menu = new Menu(this);
+            _popuptext = new PopUpText(this);
             IsMenuVisible = false;
             base.Initialize();
 
@@ -43,11 +47,13 @@ namespace Adventurer
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Doors doors = new Doors();
+            Objects objects = new Objects();
             SoundManager sound = new SoundManager();
             Maps beformaps = new Maps(1,1);
             doors.LoadContent(Content);
             sound.LoadContent(Content);
             beformaps.LoadContent(Content);
+            objects.LoadContent(Content);
            
             maps.fill();
             SoundManager.PlayMusic();
@@ -61,6 +67,8 @@ namespace Adventurer
             _graphics.ApplyChanges();
             #endregion
             IsItaWall.spriteses = sprites;
+            enemyTexture = Content.Load<Texture2D>("Enemies/Goblin/goblindown");
+            sprites.Add(new Enemy(enemyTexture, new Vector2(distance * 2, distance * 2)));
             playertexture = Content.Load<Texture2D>("Hero/hero-down");
             sprites.Add(new Player(playertexture, new Vector2(distance *5,distance *5)));
           
@@ -74,7 +82,7 @@ namespace Adventurer
             // TODO: Add your update logic here
             foreach (var sprite in sprites)
             {
-                sprite.Update(gameTime,_graphics);
+                sprite.Update(gameTime,_graphics, sprites);
             }
             if (MapsInOne.objectChange)
             {
@@ -107,10 +115,15 @@ namespace Adventurer
             {
                 IsMenuVisible =  !IsMenuVisible;
             }
-          
-            base.Update(gameTime);
             previousKeyboardState = keyboardState;
-            
+            foreach (var sprite in sprites)
+            {
+                if (sprite is Enemy)
+                {
+                    sprite.Update(gameTime, _graphics, sprites);
+                }
+            }
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -136,9 +149,10 @@ namespace Adventurer
                 
                 _menu.Draw();
             }
-
-            
-
+            if(PopUpText.showTexts)
+            {
+                _popuptext.Draw();
+            }
             base.Draw(gameTime);
         }
 
