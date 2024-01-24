@@ -19,10 +19,10 @@ namespace Adventurer.Sprites.Hero
         }
         public void pickUpItem(Items item)
         {
+            itemStoredCounter();
             if(collectedItemCount < 5)
             {
             items[collectedItemCount] = item;
-            collectedItemCount++;
             }
         }
         public void RemoveItem(Items item,int chosenItem)
@@ -30,7 +30,15 @@ namespace Adventurer.Sprites.Hero
             if(item.Durability <=0)
             {
                 items[chosenItem] = null;
-                collectedItemCount--;
+            }
+            itemStoredCounter();
+        }
+        public void itemStoredCounter()
+        {
+            collectedItemCount = 0;
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i] != null) collectedItemCount++;
             }
         }
     }

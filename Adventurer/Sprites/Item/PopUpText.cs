@@ -36,8 +36,8 @@ namespace Adventurer.Sprites.Item
         {
             var grid = new Grid
             {
-                RowSpacing = 4,
-                ColumnSpacing = 4
+                RowSpacing = 5,
+                ColumnSpacing = 5
             };
             var window = new Window
             {
@@ -47,8 +47,9 @@ namespace Adventurer.Sprites.Item
                 Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray)
 
             };
-            Grid.SetRow(window, 3);
+            Grid.SetRow(window, 4);
             grid.Widgets.Add(window);
+            window.DragDirection = DragDirection.None;
             window.CloseButton.Enabled = false;
             window.CloseButton.Visible = false;
             _desktop.Root= grid;
