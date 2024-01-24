@@ -47,9 +47,11 @@ namespace Adventurer.Sprites.Item
                 Background = new SolidBrush(Microsoft.Xna.Framework.Color.Gray)
 
             };
-            _desktop.Widgets.Add(window);
+            Grid.SetRow(window, 3);
+            grid.Widgets.Add(window);
             window.CloseButton.Enabled = false;
             window.CloseButton.Visible = false;
+            _desktop.Root= grid;
         }
         public void Draw()
         {

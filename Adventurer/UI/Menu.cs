@@ -150,7 +150,7 @@ namespace Adventurer.UI
             grid.Widgets.Add(quitButton);
             Grid.SetColumn(quitButton, 0);
             Grid.SetRow(quitButton, 4);
-
+            _desktop.Root = grid;
 
         }
 
