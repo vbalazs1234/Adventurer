@@ -22,7 +22,6 @@ namespace Adventurer.Sprites
         private float elapsedTime = 0f;
         private EnemyState currentState = EnemyState.Moving;
 
-
         public Enemy(Texture2D texture, Vector2 position) : base(texture, position)
         {
             path = new List<Vector2>();

@@ -7,6 +7,7 @@ using Adventurer.Sprites.Map;
 using Microsoft.Xna.Framework.Media;
 using Adventurer.UI;
 using Adventurer.Sprites.Item;
+using Adventurer.Sprites.Hero;
 
 namespace Adventurer
 {
@@ -19,6 +20,7 @@ namespace Adventurer
         MapLoader mapLoader = new MapLoader();
         private Menu _menu;
         private PopUpText _popuptext;
+        private InvDrawer _invdrawer;
         public static bool IsMenuVisible;
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
@@ -38,6 +40,7 @@ namespace Adventurer
 
             _menu = new Menu(this);
             _popuptext = new PopUpText(this);
+            _invdrawer = new InvDrawer(this);
             IsMenuVisible = false;
             base.Initialize();
 
@@ -84,13 +87,13 @@ namespace Adventurer
             {
                 sprite.Update(gameTime,_graphics, sprites);
             }
-            if (MapsInOne.objectChange)
+            if (MapsInOne.keyChange)
             {
                 for (int i = 0; i < sprites.Count - 2; i++)
                 {
                     sprites[i] = mapLoader.loadMap(maps)[i];
                 }
-                MapsInOne.objectChange = false;
+                MapsInOne.keyChange = false;
             }
             if (MapsInOne.PreviousPlayerMapPosition_X != MapsInOne.PlayerMapPosition_X)
             {
@@ -144,6 +147,7 @@ namespace Adventurer
                 DrawBackgroundWindow(new Rectangle(72 * 3, 36 * 7, 72 * 4, 72 * 3));
             }
             _spriteBatch.End();
+            _invdrawer.Draw();
             if(PopUpText.showTexts)
             {
                 _popuptext.Draw();

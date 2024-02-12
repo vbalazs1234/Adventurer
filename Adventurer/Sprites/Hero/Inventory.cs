@@ -22,7 +22,10 @@ namespace Adventurer.Sprites.Hero
             itemStoredCounter();
             if(collectedItemCount < 5)
             {
-            items[collectedItemCount] = item;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (items[i] == null) { items[i] = item; break; }
+                }
             }
         }
         public void RemoveItem(Items item,int chosenItem)
