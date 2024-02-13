@@ -107,6 +107,7 @@ namespace Adventurer.Sprites.Map
             }
             else if (item.Texture.Name == "Maps/Objects/chest")
             {
+                MapsInOne.objectChange = true;
                 return 4;
             }
             else

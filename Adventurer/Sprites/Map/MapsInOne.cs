@@ -15,6 +15,7 @@ namespace Adventurer.Sprites.Map
         public static int PreviousPlayerMapPosition_Y = 2;
         public static bool isOpened = false;
         public static bool keyChange = false;
+        public static bool objectChange = false;
         private Random rand = new Random(); 
         public MapsInOne()
         {
@@ -32,6 +33,11 @@ namespace Adventurer.Sprites.Map
                     maps[i, j] = map;
                 }
             }
+        }
+        public void removeObject()
+        {
+            maps[PlayerMapPosition_Y, PlayerMapPosition_X].objects[Player.P_Position_Y,Player.P_Position_X] = Maps.filler;
+            objectChange= false;
         }
         public void chanegeDoor()
         {
