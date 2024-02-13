@@ -26,6 +26,7 @@ namespace Adventurer.Sprites
         private IsItaWall isItaWall = new IsItaWall();
         private Inventory inv;
         private int selectedItem;
+        public static int Moves { get; set; }
         public Player(Texture2D texture, Vector2 position) : base(texture, position)
         {
             player_image = texture;
@@ -35,6 +36,7 @@ namespace Adventurer.Sprites
             Damage = 5 + Randomizer.RandomNum();
             selectedItem= 0;
             inv = new Inventory();
+            Moves = 1;
         }
 
         public void LevelUp()
@@ -64,22 +66,26 @@ namespace Adventurer.Sprites
                             Position.Y = _graphics.PreferredBackBufferHeight - (player_image.Width * 2);
                             MapsInOne.PlayerMapPosition_Y--;
                         }
+                        Moves++;
                         break;
                     case 3:
                         MapsInOne.isOpened = true;
                         MapsInOne.objectChange= true;
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
+                        Moves++;
                         break;
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
+                        Moves++;
                         break;
                     default:
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
+                        Moves++;
                         break;
                 }
             }
@@ -98,23 +104,27 @@ namespace Adventurer.Sprites
                             Position.Y = 0 + player_image.Width;
                             MapsInOne.PlayerMapPosition_Y++;
                         }
+                        Moves++;
                         break;
                     case 3:
                         MapsInOne.isOpened = true;
                         MapsInOne.objectChange = true;
                         Position.Y += player_image.Height;
                         player_image_name = "Hero/hero-down";
+                        Moves++;
                         break;
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
                         Position.Y += player_image.Height;
                         player_image_name = "Hero/hero-down";
+                        Moves++;
                         break;
                     default:
                     Position.Y += player_image.Height;
                     player_image_name = "Hero/hero-down";
-                    break;
+                        Moves++;
+                        break;
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A) && canMove != false)
@@ -132,22 +142,26 @@ namespace Adventurer.Sprites
                             Position.X = _graphics.PreferredBackBufferWidth - (player_image.Width * 2);
                             MapsInOne.PlayerMapPosition_X--;
                         }
+                        Moves++;
                         break;
                     case 3:
                         MapsInOne.isOpened = true;
                         MapsInOne.objectChange = true;
                         Position.X -= player_image.Width;
                         player_image_name = "Hero/hero-left";
+                        Moves++;
                         break;
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
                         Position.X -= player_image.Width;
                         player_image_name = "Hero/hero-left";
+                        Moves++;
                         break;
                     default:
                 Position.X -= player_image.Width;
                 player_image_name = "Hero/hero-left";
+                        Moves++;
                         break;
                 }
             }
@@ -166,29 +180,35 @@ namespace Adventurer.Sprites
                             Position.X = 0 + player_image.Width;
                             MapsInOne.PlayerMapPosition_X++;
                         }
+                        Moves++;
                         break;
                     case 3:
                         MapsInOne.isOpened = true;
                         MapsInOne.objectChange = true;
                         Position.X += player_image.Width;
                         player_image_name = "Hero/hero-right";
+                        Moves++;
                         break;
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
                         Position.X += player_image.Width;
                         player_image_name = "Hero/hero-right";
+                        Moves++;
                         break;
                     case 5:
                         player_image_name = "Hero/hero-right";
                         Position.X = 0 + player_image.Width;
+                        Moves++;
                         break;
                     case 6:
                         player_image_name = "Hero/hero-right";
+                        Moves++;
                         break;
                     default:
                     Position.X += player_image.Width;
                     player_image_name = "Hero/hero-right";
+                        Moves++;
                         break;
                 }
             }
