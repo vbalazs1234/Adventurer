@@ -16,7 +16,7 @@ namespace Adventurer
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         List<Sprite> sprites;
-        MapsInOne maps = new MapsInOne();
+        MapsInOne maps;
         MapLoader mapLoader = new MapLoader();
         private Menu _menu;
         private PopUpText _popuptext;
@@ -48,6 +48,7 @@ namespace Adventurer
 
         protected override void LoadContent()
         {
+            maps = new MapsInOne();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Doors doors = new Doors();
             Objects objects = new Objects();
@@ -57,7 +58,7 @@ namespace Adventurer
             sound.LoadContent(Content);
             beformaps.LoadContent(Content);
             objects.LoadContent(Content);
-           
+            MapsInOne.nextLevel = false;
             maps.fill();
             SoundManager.PlayMusic();
             // TODO: use this.Content to load your game content here
@@ -79,11 +80,14 @@ namespace Adventurer
 
         protected override void Update(GameTime gameTime)
         {
-          
-            
-           
+            if (MapsInOne.nextLevel)
+            {
+                LoadContent();
+            }
+
+
             // TODO: Add your update logic here
-            
+
             if (MapsInOne.keyChange)
             {
                 for (int i = 0; i < sprites.Count - 2; i++)

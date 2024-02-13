@@ -17,6 +17,9 @@ namespace Adventurer.Sprites.Map
             maps.chanegeDoor();
             sprites = new();
             int distance = Maps.floor.Height;
+            if (MapsInOne.PlayerMapPosition_X<5)
+            {
+                
             for (int a = 0; a < 2; a++)
             {
                 for (int i = 0; i < 10; i++)
@@ -38,6 +41,27 @@ namespace Adventurer.Sprites.Map
                     }
                 }
 
+            }
+            }
+            else
+            {
+                for (int a = 0; a < 2; a++)
+                {
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                            if (a == 0)
+                            {
+                                sprites.Add(new Sprite(maps.bossroom.boss_room[i,j], new Vector2(distance * j, distance * i)));
+                            }
+                            else
+                            {
+                                sprites.Add(new Sprite(maps.bossroom.objects[i,j],new Vector2(distance * j, distance * i)));
+                            }
+                        }
+                }   
+                }
             }
             return sprites;
         }

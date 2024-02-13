@@ -180,6 +180,7 @@ namespace Adventurer.Sprites
                         Position.X = 0 + player_image.Width;
                         P_Position_X = 1;
                         player_image_name = "Hero/hero-right";
+                        MapsInOne.PlayerMapPosition_X++;
                         break;
                     case 6:
                         player_image_name = "Hero/hero-right";

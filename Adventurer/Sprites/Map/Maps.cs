@@ -28,6 +28,7 @@ namespace Adventurer.Sprites.Map
 
         public Texture2D[,] starter_room = new Texture2D[10, 10];
         public Texture2D[,] objects = new Texture2D[10, 10];
+        public Texture2D[,] boss_room = new Texture2D[10, 10];
         int[,] Blocks = new int[4, 4];
         public Maps(int aPozition, int bPozition)
         { 
@@ -36,6 +37,14 @@ namespace Adventurer.Sprites.Map
                 basicMapGen(aPozition,bPozition);
                 RandomWalls();
                 addObjects(aPozition, bPozition);
+            }
+        }
+        public Maps()
+        {
+            if (torch != null)
+            {
+                bossRoomGen();
+                addObjects();
             }
         }
         public void LoadContent(ContentManager Content)
@@ -173,6 +182,40 @@ namespace Adventurer.Sprites.Map
                     }
                 }
             }
+        }
+
+        public void bossRoomGen()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if (i == 0 || j == 0 || i == 9 || j == 9) boss_room[i, j] = wall;
+                    else boss_room[i, j] = floor;
+                }
+            }
+            boss_room[2, 2] = wall;
+            boss_room[7, 7] = wall;
+            boss_room[2, 7] = wall;
+            boss_room[7, 2] = wall;
+        }
+        public void addObjects()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    objects[i, j] = filler;
+                }
+            }
+            objects[1, 0] = torch;
+            objects[1, 9] = torch;
+            objects[8, 0] = torch;
+            objects[8, 9] = torch;
+            objects[0, 1] = torch;
+            objects[9, 1] = torch;
+            objects[0, 8] = torch;
+            objects[9, 8] = torch;
         }
     }
 }

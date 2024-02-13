@@ -9,6 +9,7 @@ namespace Adventurer.Sprites.Map
     internal class MapsInOne
     {
         public Maps[,] maps;
+        public Maps bossroom;
         public static int PlayerMapPosition_X = 2;
         public static int PlayerMapPosition_Y = 2;
         public static int PreviousPlayerMapPosition_X = 2;
@@ -16,10 +17,13 @@ namespace Adventurer.Sprites.Map
         public static bool isOpened = false;
         public static bool keyChange = false;
         public static bool objectChange = false;
+        public static bool nextLevel=false;
+
         private Random rand = new Random(); 
         public MapsInOne()
         {
             maps = new Maps[5,5];
+            bossroom = new Maps();
         }
         public void fill()
         {
@@ -33,6 +37,8 @@ namespace Adventurer.Sprites.Map
                     maps[i, j] = map;
                 }
             }
+            bossroom.bossRoomGen();
+            bossroom.addObjects();
         }
         public void removeObject()
         {
