@@ -27,7 +27,8 @@ namespace Adventurer.Sprites
         private Inventory inv;
         private int selectedItem;
         public static int P_Position_Y=5, P_Position_X=5;
-        public static int Moves { get; set; }
+
+        public static int Moves { get; set; } 
         public Player(Texture2D texture, Vector2 position) : base(texture, position)
         {
             player_image = texture;
@@ -75,9 +76,9 @@ namespace Adventurer.Sprites
                         
                         break;
                     case 4:
-                        MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
+                        Items item = pickedItem();
                         moveUpward();
-                        inv.pickUpItem(magnifyingGlass);
+                        inv.pickUpItem(item);
                         break;
                     default:
                         moveUpward();
@@ -107,9 +108,9 @@ namespace Adventurer.Sprites
                         moveDownward();
                         break;
                     case 4:
-                        MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
+                        Items item = pickedItem();
                         moveDownward();
-                        inv.pickUpItem(magnifyingGlass);
+                        inv.pickUpItem(item);
                         break;
                     default:
                         moveDownward();
@@ -140,9 +141,9 @@ namespace Adventurer.Sprites
                         
                         break;
                     case 4:
-                        MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
+                        Items item = pickedItem();
                         moveLeft();
-                        inv.pickUpItem(magnifyingGlass);
+                        inv.pickUpItem(item);
                         break;
                     default:
                         moveLeft();
@@ -172,9 +173,9 @@ namespace Adventurer.Sprites
                         moveRight();  
                         break;
                     case 4:
-                        MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
+                        Items item=pickedItem();
                         moveRight();
-                        inv.pickUpItem(magnifyingGlass);
+                        inv.pickUpItem(item);
                         break;
                     case 5:
                         Position.X = 0 + player_image.Width;
@@ -223,9 +224,17 @@ namespace Adventurer.Sprites
                 }
                 else
                 {
-                    inv.items[selectedItem].useItem();
-                    PopUpText.showTexts = true;
-                }
+                        if(inv.items[selectedItem].Name=="Magnifying Glass")
+                        {
+                            inv.items[selectedItem].useItem();
+                            PopUpText.showTexts = true;
+                        }
+                        else
+                        {
+                            ActualHp = inv.items[selectedItem].useItem(MaxHp,ActualHp);
+                            inv.RemoveItem(inv.items[selectedItem], selectedItem);
+                        }
+                    }
                     InvDrawer invDrawer = new InvDrawer(inv, selectedItem);
                 }
                 
@@ -284,6 +293,23 @@ namespace Adventurer.Sprites
             P_Position_X++;
             player_image_name = "Hero/hero-right";
             Moves++;
+        }
+        private Items pickedItem()
+        {
+            Random rand = new Random();
+            int a = rand.Next(0, 2);
+            if (a == 0)
+            {
+                return new MagnifyingGlass();
+            }
+            else if (a == 1)
+            {
+                return new HealingOrb();
+            }
+            else
+            {
+                return new MagnifyingGlass();
+            }
         }
     }
 }

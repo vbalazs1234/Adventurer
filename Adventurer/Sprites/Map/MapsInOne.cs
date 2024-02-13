@@ -37,8 +37,8 @@ namespace Adventurer.Sprites.Map
                     maps[i, j] = map;
                 }
             }
-            bossroom.bossRoomGen();
-            bossroom.addObjects();
+            Maps boss = new Maps();
+            bossroom = boss;
         }
         public void removeObject()
         {

@@ -190,7 +190,9 @@ namespace Adventurer.Sprites.Map
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if (i == 0 || j == 0 || i == 9 || j == 9) boss_room[i, j] = wall;
+                    if (j == 0 && i == 4) boss_room[i, j] = Doors.doorLeftRight;
+                    else if (j == 0 && i == 5) boss_room[i, j] = Doors.doorLeftLeft;
+                    else if (i == 0 || j == 0 || i == 9 || j == 9) boss_room[i, j] = wall;
                     else boss_room[i, j] = floor;
                 }
             }
