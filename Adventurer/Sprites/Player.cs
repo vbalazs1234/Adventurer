@@ -69,8 +69,7 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                     case 3:
-                        MapsInOne.isOpened = true;
-                        MapsInOne.objectChange= true;
+                        
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
                         Moves++;
@@ -78,6 +77,7 @@ namespace Adventurer.Sprites
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
                         inv.pickUpItem(magnifyingGlass);
+                        
                         Position.Y -= player_image.Height;
                         player_image_name = "Hero/hero-up";
                         Moves++;
@@ -88,6 +88,7 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                 }
+                InvDrawer invDrawer = new InvDrawer(inv,selectedItem);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S) && canMove != false)
             {
@@ -107,8 +108,7 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                     case 3:
-                        MapsInOne.isOpened = true;
-                        MapsInOne.objectChange = true;
+                        
                         Position.Y += player_image.Height;
                         player_image_name = "Hero/hero-down";
                         Moves++;
@@ -126,6 +126,7 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                 }
+                InvDrawer invDrawer = new InvDrawer(inv, selectedItem);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A) && canMove != false)
             {
@@ -145,8 +146,7 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                     case 3:
-                        MapsInOne.isOpened = true;
-                        MapsInOne.objectChange = true;
+                        
                         Position.X -= player_image.Width;
                         player_image_name = "Hero/hero-left";
                         Moves++;
@@ -164,6 +164,7 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                 }
+                InvDrawer invDrawer = new InvDrawer(inv, selectedItem);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D) && canMove != false)
             {
@@ -183,8 +184,7 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                     case 3:
-                        MapsInOne.isOpened = true;
-                        MapsInOne.objectChange = true;
+                        
                         Position.X += player_image.Width;
                         player_image_name = "Hero/hero-right";
                         Moves++;
@@ -211,6 +211,7 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                 }
+                InvDrawer invDrawer = new InvDrawer(inv, selectedItem);
             }
             if(Keyboard.GetState().IsKeyDown(Keys.E) && canMove != false)
             {
@@ -219,6 +220,7 @@ namespace Adventurer.Sprites
                 {
                 selectedItem++;
                 }
+                InvDrawer invDrawer = new InvDrawer(inv, selectedItem);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Q) && canMove != false)
             {
@@ -227,6 +229,7 @@ namespace Adventurer.Sprites
                 {
                     selectedItem--;
                 }
+                InvDrawer invDrawer = new InvDrawer(inv, selectedItem);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.F) && canMove != false)
             {
@@ -237,18 +240,21 @@ namespace Adventurer.Sprites
                 {
                     PopUpText.showTexts = false;
                     inv.RemoveItem(inv.items[selectedItem],selectedItem);
+
                 }
                 else
                 {
                     inv.items[selectedItem].useItem();
                     PopUpText.showTexts = true;
                 }
+                    InvDrawer invDrawer = new InvDrawer(inv, selectedItem);
                 }
                 
             }
             if (Keyboard.GetState().IsKeyUp(Keys.F) && Keyboard.GetState().IsKeyUp(Keys.Q) && Keyboard.GetState().IsKeyUp(Keys.E) && Keyboard.GetState().IsKeyUp(Keys.W) && Keyboard.GetState().IsKeyUp(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.D) && canMove == false)
             {
                 canMove = true;
+                InvDrawer invDrawer = new InvDrawer(inv, selectedItem);
             }
             #endregion
             #region border
