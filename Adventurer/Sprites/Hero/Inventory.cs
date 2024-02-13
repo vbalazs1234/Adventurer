@@ -1,4 +1,5 @@
 ﻿using Adventurer.Sprites.Item;
+using Adventurer.Sprites.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Adventurer.Sprites.Hero
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    if (items[i] == null) { items[i] = item; break; }
+                    if (items[i] == null) { items[i] = item; MapsInOne.objectChange = true; break; }
                 }
             }
         }

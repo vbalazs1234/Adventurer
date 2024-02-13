@@ -92,14 +92,6 @@ namespace Adventurer
                 }
                 MapsInOne.keyChange = false;
             }
-            if (MapsInOne.objectChange)
-            {
-                maps.removeObject();
-                for (int i = 0; i < sprites.Count - 2; i++)
-                {
-                    sprites[i] = mapLoader.loadMap(maps)[i];
-                }
-            }
             if (MapsInOne.PreviousPlayerMapPosition_X != MapsInOne.PlayerMapPosition_X)
             {
                 for (int i = 0; i < sprites.Count-2; i++)
@@ -144,6 +136,14 @@ namespace Adventurer
                     sprite.Update(gameTime, _graphics, sprites);
                     Player.Moves++;
                     Enemy.canMove = true;
+                }
+            }
+            if (MapsInOne.objectChange)
+            {
+                maps.removeObject();
+                for (int i = 0; i < sprites.Count - 2; i++)
+                {
+                    sprites[i] = mapLoader.loadMap(maps)[i];
                 }
             }
             base.Update(gameTime);

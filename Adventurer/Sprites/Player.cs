@@ -66,7 +66,7 @@ namespace Adventurer.Sprites
                         {
                             Position.Y = _graphics.PreferredBackBufferHeight - (player_image.Width * 2);
                             MapsInOne.PlayerMapPosition_Y--;
-                            P_Position_Y = 9;
+                            P_Position_Y = 8;
                         }
                         Moves++;
                         break;
@@ -76,9 +76,8 @@ namespace Adventurer.Sprites
                         break;
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
-                        inv.pickUpItem(magnifyingGlass);
-
                         moveUpward();
+                        inv.pickUpItem(magnifyingGlass);
                         break;
                     default:
                         moveUpward();
@@ -109,8 +108,8 @@ namespace Adventurer.Sprites
                         break;
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
-                        inv.pickUpItem(magnifyingGlass);
                         moveDownward();
+                        inv.pickUpItem(magnifyingGlass);
                         break;
                     default:
                         moveDownward();
@@ -131,7 +130,7 @@ namespace Adventurer.Sprites
                         if (MapsInOne.PlayerMapPosition_X > 0)
                         {
                             Position.X = _graphics.PreferredBackBufferWidth - (player_image.Width * 2);
-                            P_Position_X = 9;
+                            P_Position_X = 8;
                             MapsInOne.PlayerMapPosition_X--;
                         }
                         Moves++;
@@ -142,8 +141,8 @@ namespace Adventurer.Sprites
                         break;
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
-                        inv.pickUpItem(magnifyingGlass);
                         moveLeft();
+                        inv.pickUpItem(magnifyingGlass);
                         break;
                     default:
                         moveLeft();
@@ -174,9 +173,8 @@ namespace Adventurer.Sprites
                         break;
                     case 4:
                         MagnifyingGlass magnifyingGlass = new MagnifyingGlass();
-                        inv.pickUpItem(magnifyingGlass);
                         moveRight();
-                        
+                        inv.pickUpItem(magnifyingGlass);
                         break;
                     case 5:
                         Position.X = 0 + player_image.Width;

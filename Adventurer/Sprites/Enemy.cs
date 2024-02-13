@@ -50,16 +50,9 @@ namespace Adventurer.Sprites
                                 break;
                             case 2:
                                 enemy_image_name = "Hero/hero-up";
-                                if (MapsInOne.PlayerMapPosition_Y > 0)
-                                {
-                                    Position.Y = graphics.PreferredBackBufferHeight - (enemy_image.Width * 2);
-                                    MapsInOne.PlayerMapPosition_Y--;
-                                }
                                 canMove = false;
                                 break;
                             case 3:
-                                MapsInOne.isOpened = true;
-                                MapsInOne.objectChange = true;
                                 Position.Y -= enemy_image.Height;
                                 enemy_image_name = "Hero/hero-up";
                                 canMove = false;
@@ -86,16 +79,8 @@ namespace Adventurer.Sprites
                                 break;
                             case 2:
                                 enemy_image_name = "Hero/hero-down";
-                                if (MapsInOne.PlayerMapPosition_Y < 4)
-                                {
-                                    Position.Y = 0 + enemy_image.Width;
-                                    MapsInOne.PlayerMapPosition_Y++;
-                                }
-                             
                                 break;
                             case 3:
-                                MapsInOne.isOpened = true;
-                                MapsInOne.objectChange = true;
                                 Position.Y += enemy_image.Height;
                                 enemy_image_name = "Hero/hero-down";
                            
@@ -121,16 +106,9 @@ namespace Adventurer.Sprites
                                 break;
                             case 2:
                                 enemy_image_name = "Hero/hero-left";
-                                if (MapsInOne.PlayerMapPosition_X > 0)
-                                {
-                                    Position.X = graphics.PreferredBackBufferWidth - (enemy_image.Height * 2);
-                                    MapsInOne.PlayerMapPosition_X--;
-                                }
                                 canMove = false;
                                 break;
                             case 3:
-                                MapsInOne.isOpened = true;
-                                MapsInOne.objectChange = true;
                                 Position.X -= enemy_image.Width;
                                 enemy_image_name = "Hero/hero-left";
                                 canMove = false;
@@ -155,16 +133,9 @@ namespace Adventurer.Sprites
                                 break;
                             case 2:
                                 enemy_image_name = "Hero/hero-right";
-                                if (MapsInOne.PlayerMapPosition_X < 4) // Assuming your map width allows movement within these bounds
-                                {
-                                    Position.X = 0 + enemy_image.Width;
-                                    MapsInOne.PlayerMapPosition_X++;
-                                }
                                 canMove = false;
                                 break;
                             case 3:
-                                MapsInOne.isOpened = true;
-                                MapsInOne.objectChange = true;
                                 Position.X += enemy_image.Width;
                                 enemy_image_name = "Hero/hero-right";
                                 canMove = false;
