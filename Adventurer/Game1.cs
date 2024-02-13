@@ -70,8 +70,8 @@ namespace Adventurer
             _graphics.ApplyChanges();
             #endregion
             IsItaWall.spriteses = sprites;
-            enemyTexture = Content.Load<Texture2D>("Enemies/Goblin/goblindown");
-            sprites.Add(new Enemy(enemyTexture, new Vector2(distance * 2, distance * 2)));
+            enemyTexture = Content.Load<Texture2D>("Hero/hero-down");
+            sprites.Add(new Enemy(enemyTexture, new Vector2(distance * 1, distance * 5)));
             playertexture = Content.Load<Texture2D>("Hero/hero-down");
             sprites.Add(new Player(playertexture, new Vector2(distance *5,distance *5)));
           
@@ -83,10 +83,7 @@ namespace Adventurer
             
            
             // TODO: Add your update logic here
-            foreach (var sprite in sprites)
-            {
-                sprite.Update(gameTime,_graphics, sprites);
-            }
+            
             if (MapsInOne.keyChange)
             {
                 for (int i = 0; i < sprites.Count - 2; i++)
@@ -120,7 +117,15 @@ namespace Adventurer
                 MapsInOne.PreviousPlayerMapPosition_Y = MapsInOne.PlayerMapPosition_Y;
             }
             sprites[sprites.Count-1].Texture = Content.Load<Texture2D>(Player.player_image_name);
-            
+
+            foreach (var item in sprites)
+            {
+                if (item is Enemy)
+                {
+                    item.Texture = Content.Load<Texture2D>(Enemy.enemy_image_name);
+                }
+            }
+
             KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Escape) && !previousKeyboardState.IsKeyDown(Keys.Escape))
             {
@@ -129,12 +134,20 @@ namespace Adventurer
             previousKeyboardState = keyboardState;
             foreach (var sprite in sprites)
             {
-                if (sprite is Enemy)
+
+                if (sprite is not Enemy)
                 {
                     sprite.Update(gameTime, _graphics, sprites);
                 }
+                if (sprite is Enemy && Player.Moves % 3 == 0)
+                {
+                    sprite.Update(gameTime, _graphics, sprites);
+                    Player.Moves++;
+                    Enemy.canMove = true;
+                }
             }
             base.Update(gameTime);
+                    
         }
 
         protected override void Draw(GameTime gameTime)

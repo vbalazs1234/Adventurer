@@ -27,6 +27,7 @@ namespace Adventurer.Sprites
         private Inventory inv;
         private int selectedItem;
         public static int P_Position_Y=5, P_Position_X=5;
+        public static int Moves { get; set; }
         public Player(Texture2D texture, Vector2 position) : base(texture, position)
         {
             player_image = texture;
@@ -36,6 +37,7 @@ namespace Adventurer.Sprites
             Damage = 5 + Randomizer.RandomNum();
             selectedItem= 0;
             inv = new Inventory();
+            Moves = 1;
         }
 
         public void LevelUp()
@@ -66,6 +68,7 @@ namespace Adventurer.Sprites
                             MapsInOne.PlayerMapPosition_Y--;
                             P_Position_Y = 9;
                         }
+                        Moves++;
                         break;
                     case 3:
                         moveUpward();
@@ -99,6 +102,7 @@ namespace Adventurer.Sprites
                             P_Position_Y = 1;
                             MapsInOne.PlayerMapPosition_Y++;
                         }
+                        Moves++;
                         break;
                     case 3:
                         moveDownward();
@@ -130,6 +134,7 @@ namespace Adventurer.Sprites
                             P_Position_X = 9;
                             MapsInOne.PlayerMapPosition_X--;
                         }
+                        Moves++;
                         break;
                     case 3:
                         moveLeft();
@@ -162,6 +167,7 @@ namespace Adventurer.Sprites
                             P_Position_X = 1;
                             MapsInOne.PlayerMapPosition_X++;
                         }
+                        Moves++;
                         break;
                     case 3:
                         moveRight();  
@@ -179,6 +185,7 @@ namespace Adventurer.Sprites
                         break;
                     case 6:
                         player_image_name = "Hero/hero-right";
+                        Moves++;
                         break;
                     default:
                         moveRight();
@@ -256,24 +263,28 @@ namespace Adventurer.Sprites
             Position.Y -= player_image.Height;
             P_Position_Y--;
             player_image_name = "Hero/hero-up";
+            Moves++;
         }
         private void moveDownward()
         {
             Position.Y += player_image.Height;
             P_Position_Y++;
             player_image_name = "Hero/hero-down";
+            Moves++;
         }
         private void moveLeft()
         {
             Position.X -= player_image.Width;
             P_Position_X--;
             player_image_name = "Hero/hero-left";
+            Moves++;
         }
         private void moveRight()
         {
             Position.X += player_image.Width;
             P_Position_X++;
             player_image_name = "Hero/hero-right";
+            Moves++;
         }
     }
 }
