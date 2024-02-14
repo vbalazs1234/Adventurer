@@ -40,6 +40,13 @@ namespace Adventurer.Sprites
             inv = new Inventory();
             Moves = 1;
         }
+        public void BackToTheStrat()
+        {
+            P_Position_Y = 5; P_Position_X = 5;
+            Position.Y = player_image.Height * 5; Position.X = player_image.Width * 5;
+            MapsInOne.PlayerMapPosition_X = 2;
+            MapsInOne.PlayerMapPosition_Y = 2;
+        }
 
         public void LevelUp()
         {
@@ -196,7 +203,7 @@ namespace Adventurer.Sprites
             if(Keyboard.GetState().IsKeyDown(Keys.E) && canMove != false)
             {
                 canMove=false;
-                if (selectedItem < 4)
+                if (selectedItem < 4 && !PopUpText.showTexts)
                 {
                 selectedItem++;
                 }
@@ -205,7 +212,7 @@ namespace Adventurer.Sprites
             if (Keyboard.GetState().IsKeyDown(Keys.Q) && canMove != false)
             {
                 canMove = false;
-                if (selectedItem > 0)
+                if (selectedItem > 0 && !PopUpText.showTexts)
                 {
                     selectedItem--;
                 }

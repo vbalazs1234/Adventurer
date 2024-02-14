@@ -109,6 +109,11 @@ namespace Adventurer.Sprites.Map
             {
                 return 4;
             }
+            else if(item.Texture.Name == "Maps/Objects/ladder")
+            {
+                MapsInOne.nextLevel = true;
+                return 1;
+            }
             else
             {
                 return 0;

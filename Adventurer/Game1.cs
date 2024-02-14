@@ -25,6 +25,7 @@ namespace Adventurer
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
         Texture2D enemyTexture;
+        Player player;
 
         public Game1()
         {
@@ -48,16 +49,22 @@ namespace Adventurer
 
         protected override void LoadContent()
         {
-            maps = new MapsInOne();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Doors doors = new Doors();
             Objects objects = new Objects();
             SoundManager sound = new SoundManager();
             Maps beformaps = new Maps(1,1);
+            maps = new MapsInOne();
+            
+            MapsInOne.isOpened = false;
             doors.LoadContent(Content);
             sound.LoadContent(Content);
             beformaps.LoadContent(Content);
             objects.LoadContent(Content);
+            if (MapsInOne.nextLevel)
+            {
+                player.BackToTheStrat();
+            }
             MapsInOne.nextLevel = false;
             maps.fill();
             SoundManager.PlayMusic();
@@ -73,9 +80,14 @@ namespace Adventurer
             IsItaWall.spriteses = sprites;
             enemyTexture = Content.Load<Texture2D>("Hero/hero-down");
             sprites.Add(new Enemy(enemyTexture, new Vector2(distance * 1, distance * 5)));
-            playertexture = Content.Load<Texture2D>("Hero/hero-down");
-            sprites.Add(new Player(playertexture, new Vector2(distance *5,distance *5)));
-          
+            if (playertexture == null)
+            {
+                 playertexture = Content.Load<Texture2D>("Hero/hero-down");
+                 player = new Player(playertexture, new Vector2(distance * 5, distance * 5));
+            }
+            sprites.Add(player);
+            
+
         }
 
         protected override void Update(GameTime gameTime)

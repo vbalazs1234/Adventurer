@@ -210,6 +210,7 @@ namespace Adventurer.Sprites.Map
                     objects[i, j] = filler;
                 }
             }
+            objects[8, 8] = Objects.ladder;
             objects[1, 0] = torch;
             objects[1, 9] = torch;
             objects[8, 0] = torch;

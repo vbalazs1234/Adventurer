@@ -11,6 +11,7 @@ namespace Adventurer.Sprites.Map
     internal class Objects
     {
         public static Texture2D chest;
+        public static Texture2D ladder;
         public Objects()
         {
             
@@ -18,6 +19,7 @@ namespace Adventurer.Sprites.Map
         public void LoadContent(ContentManager Content)
         {
             chest = Content.Load<Texture2D>("Maps/Objects/chest");
+            ladder = Content.Load<Texture2D>("Maps/Objects/ladder");
         }
     }
 }
