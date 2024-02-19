@@ -21,6 +21,7 @@ namespace Adventurer
         private Menu _menu;
         private PopUpText _popuptext;
         private InvDrawer _invdrawer;
+        private StatDrawer _statdrawer;
         public static bool IsMenuVisible;
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
@@ -42,6 +43,7 @@ namespace Adventurer
             _menu = new Menu(this);
             _popuptext = new PopUpText(this);
             _invdrawer = new InvDrawer(this);
+            _statdrawer = new StatDrawer(this);
             IsMenuVisible = false;
             base.Initialize();
 
@@ -185,6 +187,7 @@ namespace Adventurer
             }
             _spriteBatch.End();
             _invdrawer.Draw();
+            _statdrawer.Draw();
             if(PopUpText.showTexts)
             {
                 _popuptext.Draw();

@@ -39,6 +39,7 @@ namespace Adventurer.Sprites
             selectedItem= 0;
             inv = new Inventory();
             Moves = 1;
+            StatDrawer draw =new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
         }
         public void BackToTheStrat()
         {
@@ -54,6 +55,7 @@ namespace Adventurer.Sprites
             ActualHp = MaxHp;
             DefensePoint += Randomizer.RandomNum();
             Damage += Randomizer.RandomNum();
+            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
         }
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics, List<Sprite> sprites)
