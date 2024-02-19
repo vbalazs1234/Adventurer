@@ -27,6 +27,7 @@ namespace Adventurer
         Texture2D playertexture;
         Texture2D enemyTexture;
         Player player;
+        private int level=1;
 
         public Game1()
         {
@@ -66,6 +67,7 @@ namespace Adventurer
             if (MapsInOne.nextLevel)
             {
                 player.BackToTheStrat();
+                level++;
             }
             MapsInOne.nextLevel = false;
             maps.fill();
@@ -81,7 +83,7 @@ namespace Adventurer
             #endregion
             IsItaWall.spriteses = sprites;
             enemyTexture = Content.Load<Texture2D>("Hero/hero-down");
-            sprites.Add(new Enemy(enemyTexture, new Vector2(distance * 1, distance * 5)));
+            sprites.Add(new Enemy(enemyTexture, new Vector2(distance * 1, distance * 5),level));
             if (playertexture == null)
             {
                  playertexture = Content.Load<Texture2D>("Hero/hero-down");

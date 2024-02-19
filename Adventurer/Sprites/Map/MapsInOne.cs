@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Adventurer.Sprites.Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,7 @@ namespace Adventurer.Sprites.Map
         {
             if(keyChange)
             {
+                MagnifyingGlass.keycollected = true;
                 maps[Maps.keyRoomPozition_Y,Maps.keyRoomPozition_X].objects[Maps.keyInsideRoomPozition_Y, Maps.keyInsideRoomPozition_X] = Maps.filler;
             }
             if (PlayerMapPosition_X == 4 && PlayerMapPosition_Y == 2)

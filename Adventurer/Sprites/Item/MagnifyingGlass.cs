@@ -9,7 +9,7 @@ namespace Adventurer.Sprites.Item
 {
     internal class MagnifyingGlass : Items
     {
-
+        public static bool keycollected=false;
         public MagnifyingGlass()
         {
             Name = "Magnifying Glass";
@@ -20,7 +20,14 @@ namespace Adventurer.Sprites.Item
 
         public override void useItem()
         {
+            if (!keycollected)
+            {
             showText = $"The key is located in Y: {Maps.keyRoomPozition_Y+1} and X: {Maps.keyRoomPozition_X+1} room.";
+            }
+            else
+            {
+                showText = "Key has been collected!  ";
+            }
             PopUpText text = new PopUpText(showText);
             damageItem();
         }
