@@ -26,6 +26,7 @@ namespace Adventurer.Sprites
 
         public Enemy(Texture2D texture, Vector2 position,int level) : base(texture, position)
         {
+            PositionEvents.enemyCounter++;
             enemy_image = texture;
             rnd = new Random();
             canMove = false;
@@ -40,11 +41,14 @@ namespace Adventurer.Sprites
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics, List<Sprite> sprites)
         {
+            int[] pos = new int[2];
+            pos[0] = (int)Position.X;
+            pos[1] = (int)Position.Y;
+            PositionEvents.enemiesPosition.Add(PositionEvents.enemyCounter, pos);
 
-            
 
 
-            
+
             //movement clockwise
             if (canMove == true)
             {

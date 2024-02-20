@@ -61,6 +61,8 @@ namespace Adventurer.Sprites
         public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics, List<Sprite> sprites)
         {
             base.Update(gameTime,_graphics, sprites);
+            PositionEvents.playerPosition[0] =  P_Position_X;
+            PositionEvents.playerPosition[1] = P_Position_Y;
             #region Movement
             if (Keyboard.GetState().IsKeyDown(Keys.W) && canMove != false)
             {
