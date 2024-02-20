@@ -110,7 +110,7 @@ namespace Adventurer
                 events.fightTest(player, enemies[i]);
                 if (enemies[i].HP <= 0) 
                 {
-                    player.collectExp((enemies[i].level * 10));
+                    player.collectExp((enemies[i].level * 10)+10);
                     sprites.Remove(enemies[i]);
                     enemies.Remove(enemies[i]);
                 }
@@ -129,7 +129,15 @@ namespace Adventurer
                 int distance = Maps.floor.Height;
                 for (int i = 0; i < 4; i++)
                 {
-                    enemies.Add(new Enemy(enemyTexture, new Vector2(distance * rand.Next(2,9), distance * rand.Next(2, 9)), level));
+                        int pozA = 0;
+                        int pozB = 0;
+                        do
+                        {
+                            pozA = rand.Next(2, 9);
+                            pozB = rand.Next(2, 9);
+
+                        } while (maps.maps[MapsInOne.PlayerMapPosition_Y, MapsInOne.PlayerMapPosition_X].starter_room[pozB,pozA].Name == "Maps/wall");
+                    enemies.Add(new Enemy(enemyTexture, new Vector2(distance * pozA , distance *pozB), level));
                 }
                 for (int i = 0; i < enemies.Count; i++)
                 {

@@ -121,8 +121,6 @@ namespace Adventurer.Sprites.Map
             }
             else if (item.Texture.Name == "Maps/key")
             {
-                MapsInOne.isOpened = true;
-                MapsInOne.keyChange = true;
                 return 3;
             }
             else if (item.Texture.Name == "Maps/Objects/chest")

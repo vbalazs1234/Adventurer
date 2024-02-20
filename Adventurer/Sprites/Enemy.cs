@@ -38,10 +38,20 @@ namespace Adventurer.Sprites
             SP = this.level * rnd.Next(1, 7);
         }
 
-        public void GotHit(Player player, Enemy enemy)
+        public void GotHit(Player player, Enemy enemy,int crit)
         {
             Random random = new Random();
-            enemy.HP -= (2*random.Next(1,7)+player.Damage) - enemy.DP;
+            if (crit==20)
+            {
+                int damage = player.Damage+random.Next(1,7);
+                enemy.HP -= damage;
+            }
+            else
+            {
+                int damage= (2 * random.Next(1, 7) + player.Damage) - enemy.DP;
+                if (damage > 0) enemy.HP -= damage;
+                else enemy.HP -= 0;
+            }
         }
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics, List<Sprite> sprites)

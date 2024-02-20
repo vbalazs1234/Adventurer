@@ -40,7 +40,7 @@ namespace Adventurer.Sprites
             selectedItem= 0;
             inv = new Inventory();
             Moves = 1;
-            StatDrawer draw =new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
+            StatDrawer draw =new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage, exp, level);
             level = 1;
             exp = 0;
         }
@@ -59,24 +59,33 @@ namespace Adventurer.Sprites
             ActualHp = MaxHp;
             DefensePoint += Randomizer.RandomNum();
             Damage += Randomizer.RandomNum();
-            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
+            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage,exp,level);
         }
         public void collectExp(int expGot)
         {
             exp += expGot;
-            if(exp > 100*level) 
+            if(exp >= 100*level) 
             {
+                exp -= 100 * level;
                 LevelUp();
-                exp = 0;
             }
+            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage, exp, level);
         }
-        public void GotHit(Player player, Enemy enemy)
+        public void GotHit(Player player, Enemy enemy,int crit)
         {
             Random random = new Random();
-            int damage= (2 * random.Next(1, 7) + enemy.SP) - player.DefensePoint;
-            if (damage < 0) player.ActualHp -= 0;
-            if (damage >= 0) player.ActualHp -= damage; 
-            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
+            if (crit == 20)
+            {
+                int damage = random.Next(1, 7) + enemy.SP;
+                ActualHp -= damage;
+            }
+            else
+            {
+                int damage= (2 * random.Next(1, 7) + enemy.SP) - player.DefensePoint;
+                if (damage < 0) player.ActualHp -= 0;
+                if (damage >= 0) player.ActualHp -= damage; 
+            }
+            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage, exp, level);
         }
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics, List<Sprite> sprites)
@@ -102,8 +111,9 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                     case 3:
+                        MapsInOne.isOpened = true;
+                        MapsInOne.keyChange = true;
                         moveUpward();
-                        
                         break;
                     case 4:
                         Items item = pickedItem();
@@ -135,6 +145,8 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                     case 3:
+                        MapsInOne.isOpened = true;
+                        MapsInOne.keyChange = true;
                         moveDownward();
                         break;
                     case 4:
@@ -167,8 +179,9 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                     case 3:
+                        MapsInOne.isOpened = true;
+                        MapsInOne.keyChange = true;
                         moveLeft();
-                        
                         break;
                     case 4:
                         Items item = pickedItem();
@@ -200,6 +213,8 @@ namespace Adventurer.Sprites
                         Moves++;
                         break;
                     case 3:
+                        MapsInOne.isOpened = true;
+                        MapsInOne.keyChange = true;
                         moveRight();  
                         break;
                     case 4:
@@ -259,7 +274,7 @@ namespace Adventurer.Sprites
                         {
                             ActualHp = inv.items[selectedItem].useItem(MaxHp,ActualHp);
                             inv.RemoveItem(inv.items[selectedItem], selectedItem);
-                            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
+                            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage, exp, level);
                         }
                     }
                     InvDrawer invDrawer = new InvDrawer(inv, selectedItem);

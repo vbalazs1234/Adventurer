@@ -19,18 +19,22 @@ namespace Adventurer.Sprites.Hero
         private static int ActualHp;
         private static int DefensePoint;
         private static int Damage;
+        private static int Experience;
+        private static int Level;
         public StatDrawer(Game1 game)
         {
             _game = game;
             MyraEnvironment.Game = game;
             _desktop = new Desktop();
         }
-        public StatDrawer(int _MaxHp, int _ActualHp, int _DefensePoint, int _Damage)
+        public StatDrawer(int _MaxHp, int _ActualHp, int _DefensePoint, int _Damage,int exp,int level)
         {
             MaxHp=_MaxHp;
             ActualHp= _ActualHp;
             DefensePoint= _DefensePoint;
             Damage= _Damage;
+            Experience= exp;
+            Level= level;
             Initialize();
         }                 
 
@@ -43,8 +47,8 @@ namespace Adventurer.Sprites.Hero
             };
             Window window = new Window
             {
-                Title = $"Stats:     Hp:{ActualHp}/{MaxHp}",
-                Width = 216,
+                Title = $"Stats: Level:{Level}    Hp:{ActualHp}/{MaxHp}",
+                Width = 288,
                 Height = 72,
                 Background = new SolidBrush(Microsoft.Xna.Framework.Color.Black)
 
@@ -67,7 +71,11 @@ namespace Adventurer.Sprites.Hero
             {
                 Text = $"Damage:{Damage}"
             };
-            stackPanel2.Widgets.Add(def); stackPanel2.Widgets.Add(dam);
+            var exp = new Label()
+            {
+                Text = $"Exp:{Experience}/{Level * 100}"
+            };
+            stackPanel2.Widgets.Add(def); stackPanel2.Widgets.Add(dam); stackPanel2.Widgets.Add(exp);
             window.Content= stackPanel2;
             grid.Widgets.Add(window);
             grid.HorizontalAlignment = HorizontalAlignment.Left;

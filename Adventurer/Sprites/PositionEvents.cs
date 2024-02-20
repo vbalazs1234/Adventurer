@@ -18,11 +18,11 @@ namespace Adventurer.Sprites
                 Sphere = random.Next(1, 21);
                 if (Dice>=Sphere)
                 {
-                    enemy.GotHit( player, enemy);
+                    enemy.GotHit( player, enemy,Dice);
                 }
                 else if (Sphere > Dice)
                 {
-                   player.GotHit(player, enemy);
+                   player.GotHit(player, enemy,Sphere);
                 }
             }
         }
