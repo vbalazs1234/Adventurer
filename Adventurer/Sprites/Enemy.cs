@@ -16,13 +16,13 @@ namespace Adventurer.Sprites
     internal class Enemy : Sprite
     {
         private IsItaWall isItaWall = new IsItaWall();
-        public static string enemy_image_name = "Hero/hero-down";
+        public string enemy_image_name = "Hero/hero-down";
         private Texture2D enemy_image;
         private Random rnd;
-        public static bool canMove;
+        public  bool canMove;
         public int level;
-        private int HP, SP;
-        private float DP;
+        public int HP, SP;
+        public int DP;
 
         public Enemy(Texture2D texture, Vector2 position,int level) : base(texture, position)
         {
@@ -34,19 +34,19 @@ namespace Adventurer.Sprites
             else if (levelChance > 50 && levelChance <= 90) this.level = level++;
             else this.level = level + 2;
             HP = 2 * this.level * rnd.Next(1, 7);
-            DP= (float)this.level /2 * rnd.Next(1, 7);
+            DP= this.level /2 * rnd.Next(1, 7);
             SP = this.level * rnd.Next(1, 7);
+        }
+
+        public void GotHit(Player player, Enemy enemy)
+        {
+            Random random = new Random();
+            enemy.HP -= (2*random.Next(1,7)+player.Damage) - enemy.DP;
         }
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics, List<Sprite> sprites)
         {
-            int[] pos = new int[2];
-            pos[0] = (int)Position.X;
-            pos[1] = (int)Position.Y;
-
-
-
-
+            
             //movement clockwise
             if (canMove == true)
             {
@@ -156,6 +156,9 @@ namespace Adventurer.Sprites
                                 Position.X += enemy_image.Width;
                                 enemy_image_name = "Hero/hero-right";
                                 canMove = false;
+                                break;
+                            case 5:
+                                enemy_image_name = "Hero/hero-right";
                                 break;
                             default:
                                 Position.X += enemy_image.Width;

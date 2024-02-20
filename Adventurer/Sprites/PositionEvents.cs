@@ -8,15 +8,23 @@ namespace Adventurer.Sprites
 {
     internal class PositionEvents
     {
-        public Player fightTest(Player player,Enemy enemy)
+        public void fightTest(Player player,Enemy enemy)
         {
-            
-                if (player.Position == enemy.Position)
+            if (player.Position == enemy.Position)
+            {
+                int Dice,Sphere;
+                Random random = new Random();
+                Dice = random.Next(1, 21);
+                Sphere = random.Next(1, 21);
+                if (Dice>=Sphere)
                 {
-                    player.collectExp((enemy.level*10)+30);
+                    enemy.GotHit( player, enemy);
                 }
-            
-            return player;
+                else if (Sphere > Dice)
+                {
+                   player.GotHit(player, enemy);
+                }
+            }
         }
     }
 }

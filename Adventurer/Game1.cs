@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Media;
 using Adventurer.UI;
 using Adventurer.Sprites.Item;
 using Adventurer.Sprites.Hero;
+using System.Diagnostics;
+using System;
 
 namespace Adventurer
 {
@@ -69,6 +71,7 @@ namespace Adventurer
             if (MapsInOne.nextLevel)
             {
                 player.BackToTheStrat();
+                MagnifyingGlass.keycollected = false;
                 level++;
             }
             MapsInOne.nextLevel = false;
@@ -85,11 +88,7 @@ namespace Adventurer
             #endregion
             IsItaWall.spriteses = sprites;
             enemyTexture = Content.Load<Texture2D>("Hero/hero-down");
-            enemies.Add(new Enemy(enemyTexture, new Vector2(distance * 1, distance * 5), level));
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                sprites.Add(enemies[i]);
-            }
+            
             if (playertexture == null)
             {
                  playertexture = Content.Load<Texture2D>("Hero/hero-down");
@@ -109,13 +108,40 @@ namespace Adventurer
             for (int i = 0; i < enemies.Count; i++)
             {
                 events.fightTest(player, enemies[i]);
+                if (enemies[i].HP <= 0) 
+                {
+                    player.collectExp((enemies[i].level * 10));
+                    sprites.Remove(enemies[i]);
+                    enemies.Remove(enemies[i]);
+                }
+                if (player.ActualHp <= 0)
+                {
+                    System.Environment.Exit(1);
+                }
             }
 
             // TODO: Add your update logic here
-
+            if(MapsInOne.PlayerMapPosition_X < 5)
+            {
+            if(!maps.maps[MapsInOne.PlayerMapPosition_Y, MapsInOne.PlayerMapPosition_X].hadEnemies)
+            {
+                Random rand= new Random();
+                int distance = Maps.floor.Height;
+                for (int i = 0; i < 4; i++)
+                {
+                    enemies.Add(new Enemy(enemyTexture, new Vector2(distance * rand.Next(2,9), distance * rand.Next(2, 9)), level));
+                }
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    sprites.Add(enemies[i]);
+                }
+                maps.maps[MapsInOne.PlayerMapPosition_Y, MapsInOne.PlayerMapPosition_X].hadEnemies=true;
+            }
+            }
+            IsItaWall.enemyCount = enemies.Count;
             if (MapsInOne.keyChange)
             {
-                for (int i = 0; i < sprites.Count - 2; i++)
+                for (int i = 0; i < mapLoader.loadMap(maps).Count; i++)
                 {
                     sprites[i] = mapLoader.loadMap(maps)[i];
                 }
@@ -123,7 +149,7 @@ namespace Adventurer
             }
             if (MapsInOne.PreviousPlayerMapPosition_X != MapsInOne.PlayerMapPosition_X)
             {
-                for (int i = 0; i < sprites.Count-2; i++)
+                for (int i = 0; i < mapLoader.loadMap(maps).Count; i++)
                 {
                     sprites[i]=mapLoader.loadMap(maps)[i];
                 }
@@ -131,19 +157,25 @@ namespace Adventurer
             }
             else if(MapsInOne.PreviousPlayerMapPosition_Y != MapsInOne.PlayerMapPosition_Y)
             {
-                for (int i = 0; i < sprites.Count - 2; i++)
+                for (int i = 0; i < mapLoader.loadMap(maps).Count; i++)
                 {
                     sprites[i] = mapLoader.loadMap(maps)[i];
                 }
                 MapsInOne.PreviousPlayerMapPosition_Y = MapsInOne.PlayerMapPosition_Y;
             }
-            sprites[sprites.Count-1].Texture = Content.Load<Texture2D>(Player.player_image_name);
 
             foreach (var item in sprites)
             {
+                if (item is Player)
+                {
+                    item.Texture = Content.Load<Texture2D>(Player.player_image_name);
+                }
                 if (item is Enemy)
                 {
-                    item.Texture = Content.Load<Texture2D>(Enemy.enemy_image_name);
+                    for (int i = 0; i < enemies.Count; i++)
+                    {
+                        if (item == enemies[i]) item.Texture = Content.Load<Texture2D>(enemies[i].enemy_image_name);
+                    }
                 }
             }
 
@@ -153,24 +185,36 @@ namespace Adventurer
                 IsMenuVisible =  !IsMenuVisible;
             }
             previousKeyboardState = keyboardState;
-            foreach (var sprite in sprites)
+                foreach (var sprite in sprites)
             {
-
                 if (sprite is not Enemy)
                 {
                     sprite.Update(gameTime, _graphics, sprites);
                 }
+            }
+                if (Player.Moves % 3 == 0)
+            {
+            foreach (var sprite in sprites)
+            {
+
                 if (sprite is Enemy && Player.Moves % 3 == 0)
                 {
+                    for (int i = 0; i < enemies.Count; i++)
+                    {
+                        if (sprite == enemies[i])
+                        {
+                            enemies[i].canMove = true;
+                        }
+                    }
                     sprite.Update(gameTime, _graphics, sprites);
-                    Player.Moves++;
-                    Enemy.canMove = true;
                 }
+            }
+                Player.Moves++;
             }
             if (MapsInOne.objectChange)
             {
                 maps.removeObject();
-                for (int i = 0; i < sprites.Count - 2; i++)
+                for (int i = 0; i < mapLoader.loadMap(maps).Count; i++)
                 {
                     sprites[i] = mapLoader.loadMap(maps)[i];
                 }

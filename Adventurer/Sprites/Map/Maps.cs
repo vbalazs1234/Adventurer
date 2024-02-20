@@ -16,7 +16,7 @@ namespace Adventurer.Sprites.Map
     internal class Maps
     {
         Random rand = new Random();
-
+        public bool hadEnemies=false;
         public static Texture2D torch;
         public static Texture2D wall;
         public static Texture2D floor;

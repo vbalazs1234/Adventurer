@@ -64,11 +64,19 @@ namespace Adventurer.Sprites
         public void collectExp(int expGot)
         {
             exp += expGot;
-            if(exp > 50*level) 
+            if(exp > 100*level) 
             {
                 LevelUp();
                 exp = 0;
             }
+        }
+        public void GotHit(Player player, Enemy enemy)
+        {
+            Random random = new Random();
+            int damage= (2 * random.Next(1, 7) + enemy.SP) - player.DefensePoint;
+            if (damage < 0) player.ActualHp -= 0;
+            if (damage >= 0) player.ActualHp -= damage; 
+            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
         }
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics, List<Sprite> sprites)
@@ -205,10 +213,6 @@ namespace Adventurer.Sprites
                         player_image_name = "Hero/hero-right";
                         MapsInOne.PlayerMapPosition_X++;
                         break;
-                    case 6:
-                        player_image_name = "Hero/hero-right";
-                        Moves++;
-                        break;
                     default:
                         moveRight();
                         break;
@@ -255,6 +259,7 @@ namespace Adventurer.Sprites
                         {
                             ActualHp = inv.items[selectedItem].useItem(MaxHp,ActualHp);
                             inv.RemoveItem(inv.items[selectedItem], selectedItem);
+                            StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
                         }
                     }
                     InvDrawer invDrawer = new InvDrawer(inv, selectedItem);

@@ -12,7 +12,7 @@ namespace Adventurer.Sprites.Map
     internal class IsItaWall
     {
         public static List<Sprite> spriteses;
-
+        public static int enemyCount=0;
         public int Is_it_a_wall_upward(Vector2 Position)
         {
             foreach (var item in spriteses)
@@ -21,7 +21,11 @@ namespace Adventurer.Sprites.Map
                 {
                     if (item.Texture.Name == "Maps/Doors/doorTopLeft" || item.Texture.Name == "Maps/Doors/doorTopRight")
                     {
-                        return 2;
+                        if (enemyCount == 0)
+                        {
+                            return 2;
+                        }
+                        return 1;
                     }
                     if (Checkingzone(item) != 0)
                     {
@@ -39,7 +43,11 @@ namespace Adventurer.Sprites.Map
                 {
                     if (item.Texture.Name == "Maps/Doors/doorBottomLeft" || item.Texture.Name == "Maps/Doors/doorBottomRight")
                     {
-                        return 2;
+                        if (enemyCount == 0)
+                        {
+                            return 2;
+                        }
+                        return 1;
                     }
                     if (Checkingzone(item) != 0)
                     {
@@ -57,7 +65,11 @@ namespace Adventurer.Sprites.Map
                 {
                     if (item.Texture.Name == "Maps/Doors/doorLeftLeft" || item.Texture.Name == "Maps/Doors/doorLeftRight")
                     {
-                        return 2;
+                        if (enemyCount == 0)
+                        {
+                            return 2;
+                        }
+                        return 1;
                     }
                     if (Checkingzone(item) != 0)
                     {
@@ -75,15 +87,23 @@ namespace Adventurer.Sprites.Map
                 {
                     if (item.Texture.Name == "Maps/Doors/doorRightLeft" || item.Texture.Name == "Maps/Doors/doorRightRight")
                     {
-                        return 2;
+                        if (enemyCount == 0)
+                        {
+                            return 2;
+                        }
+                        return 1;
                     }
                     else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right")
                     {
-                        return 5;
+                        if (enemyCount == 0)
+                        {
+                            return 5;
+                        }
+                        return 1;
                     }
                     else if (item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-left-closed" || item.Texture.Name == "Maps/Doors/BossRoom/boss-room-door-right-closed")
                     {
-                        return 6;
+                        return 1;
                     }
                     if(Checkingzone(item) !=0)
                     {
