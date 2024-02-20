@@ -8,9 +8,15 @@ namespace Adventurer.Sprites
 {
     internal class PositionEvents
     {
-        public static int enemyCounter=0;
-        public static int[] playerPosition = new int[2];
-        public static Dictionary<int, int[]> enemiesPosition = new Dictionary<int,int[]>();
-
+        public Player fightTest(Player player,Enemy enemy)
+        {
+            
+                if (player.Position == enemy.Position)
+                {
+                    player.collectExp((enemy.level*10)+30);
+                }
+            
+            return player;
+        }
     }
 }

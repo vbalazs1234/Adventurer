@@ -27,6 +27,7 @@ namespace Adventurer.Sprites
         private Inventory inv;
         private int selectedItem;
         public static int P_Position_Y=5, P_Position_X=5;
+        private int level, exp;
 
         public static int Moves { get; set; } 
         public Player(Texture2D texture, Vector2 position) : base(texture, position)
@@ -40,6 +41,8 @@ namespace Adventurer.Sprites
             inv = new Inventory();
             Moves = 1;
             StatDrawer draw =new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
+            level = 1;
+            exp = 0;
         }
         public void BackToTheStrat()
         {
@@ -51,18 +54,26 @@ namespace Adventurer.Sprites
 
         public void LevelUp()
         {
+            level++;
             MaxHp += Randomizer.RandomNum();
             ActualHp = MaxHp;
             DefensePoint += Randomizer.RandomNum();
             Damage += Randomizer.RandomNum();
             StatDrawer draw = new StatDrawer(MaxHp, ActualHp, DefensePoint, Damage);
         }
+        public void collectExp(int expGot)
+        {
+            exp += expGot;
+            if(exp > 50*level) 
+            {
+                LevelUp();
+                exp = 0;
+            }
+        }
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager _graphics, List<Sprite> sprites)
         {
             base.Update(gameTime,_graphics, sprites);
-            PositionEvents.playerPosition[0] =  P_Position_X;
-            PositionEvents.playerPosition[1] = P_Position_Y;
             #region Movement
             if (Keyboard.GetState().IsKeyDown(Keys.W) && canMove != false)
             {

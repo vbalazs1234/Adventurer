@@ -20,13 +20,12 @@ namespace Adventurer.Sprites
         private Texture2D enemy_image;
         private Random rnd;
         public static bool canMove;
-        private int level;
+        public int level;
         private int HP, SP;
         private float DP;
 
         public Enemy(Texture2D texture, Vector2 position,int level) : base(texture, position)
         {
-            PositionEvents.enemyCounter++;
             enemy_image = texture;
             rnd = new Random();
             canMove = false;
@@ -34,9 +33,9 @@ namespace Adventurer.Sprites
             if (levelChance <= 50) this.level = level;
             else if (levelChance > 50 && levelChance <= 90) this.level = level++;
             else this.level = level + 2;
-            HP = 2 * level * rnd.Next(1, 7);
-            DP= (float)level /2 * rnd.Next(1, 7);
-            SP = level * rnd.Next(1, 7);
+            HP = 2 * this.level * rnd.Next(1, 7);
+            DP= (float)this.level /2 * rnd.Next(1, 7);
+            SP = this.level * rnd.Next(1, 7);
         }
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics, List<Sprite> sprites)
@@ -44,7 +43,6 @@ namespace Adventurer.Sprites
             int[] pos = new int[2];
             pos[0] = (int)Position.X;
             pos[1] = (int)Position.Y;
-            PositionEvents.enemiesPosition.Add(PositionEvents.enemyCounter, pos);
 
 
 

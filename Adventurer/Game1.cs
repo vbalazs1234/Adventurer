@@ -28,6 +28,8 @@ namespace Adventurer
         Texture2D enemyTexture;
         Player player;
         private int level=1;
+        PositionEvents events = new PositionEvents();
+        List<Enemy> enemies = new List<Enemy>();
 
         public Game1()
         {
@@ -83,7 +85,11 @@ namespace Adventurer
             #endregion
             IsItaWall.spriteses = sprites;
             enemyTexture = Content.Load<Texture2D>("Hero/hero-down");
-            sprites.Add(new Enemy(enemyTexture, new Vector2(distance * 1, distance * 5),level));
+            enemies.Add(new Enemy(enemyTexture, new Vector2(distance * 1, distance * 5), level));
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                sprites.Add(enemies[i]);
+            }
             if (playertexture == null)
             {
                  playertexture = Content.Load<Texture2D>("Hero/hero-down");
@@ -100,7 +106,10 @@ namespace Adventurer
             {
                 LoadContent();
             }
-
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                events.fightTest(player, enemies[i]);
+            }
 
             // TODO: Add your update logic here
 
