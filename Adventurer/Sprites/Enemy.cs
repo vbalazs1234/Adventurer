@@ -16,7 +16,7 @@ namespace Adventurer.Sprites
     internal class Enemy : Sprite
     {
         private IsItaWall isItaWall = new IsItaWall();
-        public string enemy_image_name = "Hero/hero-down";
+        public string enemy_image_name = "Enemies/hero-down";
         private Texture2D enemy_image;
         private Random rnd;
         public  bool canMove;
@@ -68,26 +68,26 @@ namespace Adventurer.Sprites
                         switch (isItaWall.Is_it_a_wall_upward(Position))
                         {
                             case 1:
-                                enemy_image_name = "Hero/hero-up";
+                                enemy_image_name = "Enemies/hero-up";
                                 break;
                             case 2:
-                                enemy_image_name = "Hero/hero-up";
+                                enemy_image_name = "Enemies/hero-up";
                                 canMove = false;
                                 break;
                             case 3:
                                 Position.Y -= enemy_image.Height;
-                                enemy_image_name = "Hero/hero-up";
+                                enemy_image_name = "Enemies/hero-up";
                                 canMove = false;
                                 break;
                             case 4:
 
                                 Position.Y -= enemy_image.Height;
-                                enemy_image_name = "Hero/hero-up";
+                                enemy_image_name = "Enemies/hero-up";
                                 canMove = false;
                                 break;
                             default:
                                 Position.Y -= enemy_image.Height;
-                                enemy_image_name = "Hero/hero-up";
+                                enemy_image_name = "Enemies/hero-up";
                                 canMove = false;
                                 break;
                         }
@@ -97,25 +97,25 @@ namespace Adventurer.Sprites
                         switch (isItaWall.Is_it_a_wall_downward(Position))
                         {
                             case 1:
-                                enemy_image_name = "Hero/hero-down";
+                                enemy_image_name = "Enemies/hero-down";
                                 break;
                             case 2:
-                                enemy_image_name = "Hero/hero-down";
+                                enemy_image_name = "Enemies/hero-down";
                                 break;
                             case 3:
                                 Position.Y += enemy_image.Height;
-                                enemy_image_name = "Hero/hero-down";
+                                enemy_image_name = "Enemies/hero-down";
                            
                                 break;
                             case 4:
 
                                 Position.Y += enemy_image.Height;
-                                enemy_image_name = "Hero/hero-down";
+                                enemy_image_name = "Enemies/hero-down";
                              
                                 break;
                             default:
                                 Position.Y += enemy_image.Height;
-                                enemy_image_name = "Hero/hero-down";
+                                enemy_image_name = "Enemies/hero-down";
                                 
                                 break;
                         }
@@ -124,25 +124,25 @@ namespace Adventurer.Sprites
                         switch (isItaWall.Is_it_a_wall_left(Position))
                         {
                             case 1:
-                                enemy_image_name = "Hero/hero-left";
+                                enemy_image_name = "Enemies/hero-left";
                                 break;
                             case 2:
-                                enemy_image_name = "Hero/hero-left";
+                                enemy_image_name = "Enemies/hero-left";
                                 canMove = false;
                                 break;
                             case 3:
                                 Position.X -= enemy_image.Width;
-                                enemy_image_name = "Hero/hero-left";
+                                enemy_image_name = "Enemies/hero-left";
                                 canMove = false;
                                 break;
                             case 4:
                                 Position.X -= enemy_image.Width;
-                                enemy_image_name = "Hero/hero-left";
+                                enemy_image_name = "Enemies/hero-left";
                                 canMove = false;
                                 break;
                             default:
                                 Position.X -= enemy_image.Width;
-                                enemy_image_name = "Hero/hero-left";
+                                enemy_image_name = "Enemies/hero-left";
                                 canMove = false;
                                 break;
                         }
@@ -151,28 +151,28 @@ namespace Adventurer.Sprites
                         switch (isItaWall.Is_it_a_wall_right(Position))
                         {
                             case 1:
-                                enemy_image_name = "Hero/hero-right";
+                                enemy_image_name = "Enemies/hero-right";
                                 break;
                             case 2:
-                                enemy_image_name = "Hero/hero-right";
+                                enemy_image_name = "Enemies/hero-right";
                                 canMove = false;
                                 break;
                             case 3:
                                 Position.X += enemy_image.Width;
-                                enemy_image_name = "Hero/hero-right";
+                                enemy_image_name = "Enemies/hero-right";
                                 canMove = false;
                                 break;
                             case 4:
                                 Position.X += enemy_image.Width;
-                                enemy_image_name = "Hero/hero-right";
+                                enemy_image_name = "Enemies/hero-right";
                                 canMove = false;
                                 break;
                             case 5:
-                                enemy_image_name = "Hero/hero-right";
+                                enemy_image_name = "Enemies/hero-right";
                                 break;
                             default:
                                 Position.X += enemy_image.Width;
-                                enemy_image_name = "Hero/hero-right";
+                                enemy_image_name = "Enemies/hero-right";
                                 canMove = false;
                                 break;
                         }

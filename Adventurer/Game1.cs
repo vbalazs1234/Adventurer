@@ -127,7 +127,8 @@ namespace Adventurer
             {
                 Random rand= new Random();
                 int distance = Maps.floor.Height;
-                for (int i = 0; i < 4; i++)
+                    int enemyAmount = rand.Next(0, 7);
+                for (int i = 0; i < enemyAmount; i++)
                 {
                         int pozA = 0;
                         int pozB = 0;
