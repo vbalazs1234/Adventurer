@@ -50,9 +50,10 @@ namespace Adventurer.Sprites
 
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, float scale)
         {
-            spriteBatch.Draw(Texture, Position, Color.White);
+            Scale = scale;
+            spriteBatch.Draw(Texture, rectangle, Color.White);
         }
     }
 }

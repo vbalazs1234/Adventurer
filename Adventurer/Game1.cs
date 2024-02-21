@@ -241,7 +241,14 @@ namespace Adventurer
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             foreach (var sprite in sprites)
             {
-                sprite.Draw(_spriteBatch);
+                if (sprite is Enemy)
+                {
+                sprite.Draw(_spriteBatch, 2f);
+                }
+                else
+                {
+                    sprite.Draw(_spriteBatch, 1f);
+                }
             }
             
             if (IsMenuVisible)
