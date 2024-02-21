@@ -241,7 +241,7 @@ namespace Adventurer
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             foreach (var sprite in sprites)
             {
-                if (sprite is Enemy)
+                if (sprite is Boss)
                 {
                 sprite.Draw(_spriteBatch, 2f);
                 }
