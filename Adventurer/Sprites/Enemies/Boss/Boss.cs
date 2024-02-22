@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Adventurer.Sprites
+namespace Adventurer.Sprites.Enemies.Boss
 {
     internal class Boss : Sprite
     {

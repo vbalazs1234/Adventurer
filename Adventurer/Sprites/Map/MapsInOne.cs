@@ -1,4 +1,5 @@
-﻿using Adventurer.Sprites.Item;
+﻿using Adventurer.Sprites.Hero;
+using Adventurer.Sprites.Item;
 using System;
 using System.Collections.Generic;
 using System.Linq;

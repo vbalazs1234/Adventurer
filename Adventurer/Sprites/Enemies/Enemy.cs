@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Adventurer;
 using System.Threading.Tasks;
 using Adventurer.Sprites.Map;
 using Adventurer.Sprites.Item;
 using System.Diagnostics;
+using Adventurer.Sprites.Hero;
 
-namespace Adventurer.Sprites
+namespace Adventurer.Sprites.Enemies
 {
     internal class Enemy : Sprite
     {
@@ -19,36 +19,36 @@ namespace Adventurer.Sprites
         public string enemy_image_name = "Enemies/hero-down";
         private Texture2D enemy_image;
         private Random rnd;
-        public  bool canMove;
+        public bool canMove;
         public int level;
         public int HP, SP;
         public int DP;
 
-        public Enemy(Texture2D texture, Vector2 position,int level) : base(texture, position)
+        public Enemy(Texture2D texture, Vector2 position, int level) : base(texture, position)
         {
             enemy_image = texture;
             rnd = new Random();
             canMove = false;
-            int levelChance=rnd.Next(1, 101);
+            int levelChance = rnd.Next(1, 101);
             if (levelChance <= 50) this.level = level;
             else if (levelChance > 50 && levelChance <= 90) this.level = level++;
             else this.level = level + 2;
             HP = 2 * this.level * rnd.Next(1, 7);
-            DP= this.level /2 * rnd.Next(1, 7);
+            DP = this.level / 2 * rnd.Next(1, 7);
             SP = this.level * rnd.Next(1, 7);
         }
 
-        public void GotHit(Player player, Enemy enemy,int crit)
+        public void GotHit(Player player, Enemy enemy, int crit)
         {
             Random random = new Random();
-            if (crit==20)
+            if (crit == 20)
             {
-                int damage = player.Damage+random.Next(1,7);
+                int damage = player.Damage + random.Next(1, 7);
                 enemy.HP -= damage;
             }
             else
             {
-                int damage= (2 * random.Next(1, 7) + player.Damage) - enemy.DP;
+                int damage = 2 * random.Next(1, 7) + player.Damage - enemy.DP;
                 if (damage > 0) enemy.HP -= damage;
                 else enemy.HP -= 0;
             }
@@ -56,12 +56,12 @@ namespace Adventurer.Sprites
 
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics, List<Sprite> sprites)
         {
-            
+
             //movement clockwise
             if (canMove == true)
             {
-            int random = rnd.Next(1, 5);
-            Debug.WriteLine($"{random}");
+                int random = rnd.Next(1, 5);
+                Debug.WriteLine($"{random}");
                 switch (random)
                 {
                     case 1:
@@ -91,8 +91,8 @@ namespace Adventurer.Sprites
                                 canMove = false;
                                 break;
                         }
-                
-                    break;
+
+                        break;
                     case 3:
                         switch (isItaWall.Is_it_a_wall_downward(Position))
                         {
@@ -105,18 +105,18 @@ namespace Adventurer.Sprites
                             case 3:
                                 Position.Y += enemy_image.Height;
                                 enemy_image_name = "Enemies/hero-down";
-                           
+
                                 break;
                             case 4:
 
                                 Position.Y += enemy_image.Height;
                                 enemy_image_name = "Enemies/hero-down";
-                             
+
                                 break;
                             default:
                                 Position.Y += enemy_image.Height;
                                 enemy_image_name = "Enemies/hero-down";
-                                
+
                                 break;
                         }
                         break;
@@ -178,8 +178,8 @@ namespace Adventurer.Sprites
                         }
                         break;
                     default:
-                    break;
-            }
+                        break;
+                }
                 base.Update(gameTime, graphics, sprites);
             }
             else
@@ -188,7 +188,7 @@ namespace Adventurer.Sprites
             }
         }
 
-        
+
     }
 
 }

@@ -10,6 +10,8 @@ using Adventurer.Sprites.Item;
 using Adventurer.Sprites.Hero;
 using System.Diagnostics;
 using System;
+using Adventurer.Sprites.Enemies.Boss;
+using Adventurer.Sprites.Enemies;
 
 namespace Adventurer
 {
@@ -23,7 +25,8 @@ namespace Adventurer
         private Menu _menu;
         private PopUpText _popuptext;
         private InvDrawer _invdrawer;
-        private StatDrawer _statdrawer;
+        private Sprites.Hero.StatDrawer _statdrawer;
+        private Sprites.Enemies.StatDrawer statDrawer;
         public static bool IsMenuVisible;
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
@@ -48,7 +51,8 @@ namespace Adventurer
             _menu = new Menu(this);
             _popuptext = new PopUpText(this);
             _invdrawer = new InvDrawer(this);
-            _statdrawer = new StatDrawer(this);
+            _statdrawer = new Sprites.Hero.StatDrawer(this);
+            statDrawer = new Sprites.Enemies.StatDrawer(this);
             IsMenuVisible = false;
             base.Initialize();
 
@@ -105,6 +109,7 @@ namespace Adventurer
             {
                 LoadContent();
             }
+            #region Fight
             for (int i = 0; i < enemies.Count; i++)
             {
                 events.fightTest(player, enemies[i]);
@@ -119,9 +124,10 @@ namespace Adventurer
                     System.Environment.Exit(1);
                 }
             }
-
+            #endregion
             // TODO: Add your update logic here
-            if(MapsInOne.PlayerMapPosition_X < 5)
+            #region EnemySpawning
+            if (MapsInOne.PlayerMapPosition_X < 5)
             {
             if(!maps.maps[MapsInOne.PlayerMapPosition_Y, MapsInOne.PlayerMapPosition_X].hadEnemies)
             {
@@ -147,6 +153,8 @@ namespace Adventurer
                 maps.maps[MapsInOne.PlayerMapPosition_Y, MapsInOne.PlayerMapPosition_X].hadEnemies=true;
             }
             }
+            #endregion
+            #region MapLoading
             IsItaWall.enemyCount = enemies.Count;
             if (MapsInOne.keyChange)
             {
@@ -172,7 +180,8 @@ namespace Adventurer
                 }
                 MapsInOne.PreviousPlayerMapPosition_Y = MapsInOne.PlayerMapPosition_Y;
             }
-
+            #endregion
+            #region TextureRefresh
             foreach (var item in sprites)
             {
                 if (item is Player)
@@ -187,39 +196,48 @@ namespace Adventurer
                     }
                 }
             }
-
+            #endregion
             KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Escape) && !previousKeyboardState.IsKeyDown(Keys.Escape))
             {
                 IsMenuVisible =  !IsMenuVisible;
+                Sprites.Hero.StatDrawer.showAll = false;
+
+            }
+            else if(keyboardState.IsKeyDown(Keys.Tab) && !previousKeyboardState.IsKeyDown(Keys.Tab))
+            {
+                if(!IsMenuVisible)Sprites.Hero.StatDrawer.showAll = !Sprites.Hero.StatDrawer.showAll;
             }
             previousKeyboardState = keyboardState;
-                foreach (var sprite in sprites)
+            foreach (var sprite in sprites)
             {
                 if (sprite is not Enemy)
                 {
                     sprite.Update(gameTime, _graphics, sprites);
                 }
             }
-                if (Player.Moves % 3 == 0)
+            #region EnemyMovement
+            if (Player.Moves % 3 == 0)
             {
-            foreach (var sprite in sprites)
-            {
-
-                if (sprite is Enemy && Player.Moves % 3 == 0)
+                foreach (var sprite in sprites)
                 {
-                    for (int i = 0; i < enemies.Count; i++)
+
+                    if (sprite is Enemy && Player.Moves % 3 == 0)
                     {
-                        if (sprite == enemies[i])
+                        for (int i = 0; i < enemies.Count; i++)
                         {
-                            enemies[i].canMove = true;
+                            if (sprite == enemies[i])
+                            {
+                                enemies[i].canMove = true;
+                            }
                         }
+                        sprite.Update(gameTime, _graphics, sprites);
                     }
-                    sprite.Update(gameTime, _graphics, sprites);
                 }
+                    Player.Moves++;
             }
-                Player.Moves++;
-            }
+            #endregion
+            #region ObjectReffresher
             if (MapsInOne.objectChange)
             {
                 maps.removeObject();
@@ -228,6 +246,7 @@ namespace Adventurer
                     sprites[i] = mapLoader.loadMap(maps)[i];
                 }
             }
+            #endregion
             base.Update(gameTime);
                     
         }
@@ -259,6 +278,19 @@ namespace Adventurer
             _spriteBatch.End();
             _invdrawer.Draw();
             _statdrawer.Draw();
+            foreach (var item in sprites)
+            {
+                if(item is Enemy)
+                {
+                    for (int i = 0; i < enemies.Count; i++)
+                    {
+                        if (events.showEnemyStats(player, enemies[i]) && enemies[i]==item)
+                        {
+                            statDrawer.Draw();
+                        }
+                    }
+                }
+            }
             if(PopUpText.showTexts)
             {
                 _popuptext.Draw();
