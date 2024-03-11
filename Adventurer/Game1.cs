@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System;
 using Adventurer.Sprites.Enemies.Boss;
 using Adventurer.Sprites.Enemies;
+using System.Net.Mime;
 
 namespace Adventurer
 {
@@ -31,7 +32,9 @@ namespace Adventurer
         private KeyboardState previousKeyboardState;
         Texture2D playertexture;
         Texture2D enemyTexture;
+        Texture2D bossTexture;
         Player player;
+        Boss boss;
         private int level=1;
         PositionEvents events = new PositionEvents();
         List<Enemy> enemies = new List<Enemy>();
@@ -91,14 +94,16 @@ namespace Adventurer
             _graphics.ApplyChanges();
             #endregion
             IsItaWall.spriteses = sprites;
-            enemyTexture = Content.Load<Texture2D>("Hero/hero-down");
-            
+            enemyTexture = Content.Load<Texture2D>("Enemies/hero-down");
+            bossTexture = Content.Load<Texture2D>("Enemies/Bosses/Boss1/boss");
+            //boss = new Boss(bossTexture, new Vector2(distance*5,distance*5),level);
             if (playertexture == null)
             {
                  playertexture = Content.Load<Texture2D>("Hero/hero-down");
                  player = new Player(playertexture, new Vector2(distance * 5, distance * 5));
             }
             sprites.Add(player);
+            //sprites.Add(boss);
             
 
         }
@@ -117,6 +122,12 @@ namespace Adventurer
                 {
                     player.collectExp((enemies[i].level * 10)+10);
                     sprites.Remove(enemies[i]);
+
+                    if (enemies[i] == boss)
+                    {
+                        MapsInOne.nextLevel = true;
+                    }
+
                     enemies.Remove(enemies[i]);
                 }
                 if (player.ActualHp <= 0)
@@ -124,6 +135,7 @@ namespace Adventurer
                     System.Environment.Exit(1);
                 }
             }
+                
             #endregion
             // TODO: Add your update logic here
             #region EnemySpawning
@@ -171,6 +183,12 @@ namespace Adventurer
                     sprites[i]=mapLoader.loadMap(maps)[i];
                 }
                 MapsInOne.PreviousPlayerMapPosition_X = MapsInOne.PlayerMapPosition_X;
+                if (MapsInOne.PlayerMapPosition_X == 5)
+                {
+                    boss = new Boss(bossTexture, new Vector2(72 * 5, 72 * 5), level);
+                    enemies.Add(boss);
+                    sprites.Add(enemies[0]);
+                }
             }
             else if(MapsInOne.PreviousPlayerMapPosition_Y != MapsInOne.PlayerMapPosition_Y)
             {

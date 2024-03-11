@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Adventurer.Sprites.Enemies;
+using Adventurer.Sprites.Enemies.Boss;
 using Adventurer.Sprites.Hero;
 
 namespace Adventurer.Sprites
@@ -26,6 +27,28 @@ namespace Adventurer.Sprites
                 {
                     player.GotHit(player, enemy, Sphere);
                 }
+            }
+        }
+        public void fightTest(Player player, Boss boss)
+        {
+            if (boss != null)
+            {
+                
+            if (player.Position == boss.Position)
+            {
+                int Dice, Sphere;
+                Random random = new Random();
+                Dice = random.Next(1, 21);
+                Sphere = random.Next(1, 21);
+                if (Dice >= Sphere)
+                {
+                    boss.GotHit(player, boss, Dice);
+                }
+                else if (Sphere > Dice)
+                {
+                    player.GotHit(player, boss, Sphere);
+                }
+            }
             }
         }
         public bool showEnemyStats(Player player, Enemy enemy)

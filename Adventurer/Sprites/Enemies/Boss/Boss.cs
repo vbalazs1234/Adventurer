@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 
 namespace Adventurer.Sprites.Enemies.Boss
 {
-    internal class Boss : Sprite
+    internal class Boss : Enemy
     {
-        public Boss(Texture2D texture, Vector2 position) : base(texture, position)
+        public Boss(Texture2D texture, Vector2 position, int level) : base(texture, position,level)
         {
 
+        }
+        public override void Update(GameTime gameTime, GraphicsDeviceManager graphics, List<Sprite> sprites)
+        {
+            base.Update(gameTime, graphics, sprites);
         }
     }
 }
